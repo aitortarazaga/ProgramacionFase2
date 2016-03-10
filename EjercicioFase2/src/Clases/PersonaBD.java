@@ -4,12 +4,16 @@ package Clases;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Calendar;
+import java.util.Date;
 
 public class PersonaBD {
+    
+    private static Persona per = null;
+    
     public static Persona comprobarDni(String dni){
-        Persona per = null;
         
-        String select = "select * from trabajadores where dni = " + dni;
+        
+        String select = "select * from trabajadores where dni = '" + dni + "'";
         
         try{
             Statement sentencia = GenericoBD.conexion().createStatement();
@@ -36,5 +40,12 @@ public class PersonaBD {
             javax.swing.JOptionPane.showMessageDialog(null ,"Problemas"+e.getMessage());
         }
         return per;
+    }
+    
+    public static void guardarPersona(String nombre, String apellido1, String apellido2, String calle, String portal, String piso, String mano, String telPers, String telMovil, String salario, Calendar fecha, String opc){
+        fecha = Calendar.getInstance();
+        Date date = fecha.getTime();  
+        
+        String secuencia = "INSERT INTO " + opc + " VALUES(";
     }
 }

@@ -40,8 +40,8 @@ public class Cambio extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        TFtelPers = new javax.swing.JFormattedTextField();
         TFmovil = new javax.swing.JFormattedTextField();
+        TFtelPers = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         TFsalario = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
@@ -69,8 +69,18 @@ public class Cambio extends javax.swing.JFrame {
         jLabel4.setText("PRIMER APELLIDO");
 
         TFnombre.setEnabled(false);
+        TFnombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TFnombreActionPerformed(evt);
+            }
+        });
 
         TFapellidoUno.setEnabled(false);
+        TFapellidoUno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TFapellidoUnoActionPerformed(evt);
+            }
+        });
 
         try {
             TFdni.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("########U")));
@@ -89,21 +99,41 @@ public class Cambio extends javax.swing.JFrame {
         jLabel5.setText("Calle:");
 
         TFcalle.setEnabled(false);
+        TFcalle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TFcalleActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("Portal:");
 
         TFportal.setEnabled(false);
+        TFportal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TFportalActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("Piso:");
 
         TFpiso.setEnabled(false);
+        TFpiso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TFpisoActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("Mano:");
 
         TFmano.setEnabled(false);
+        TFmano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TFmanoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -157,18 +187,23 @@ public class Cambio extends javax.swing.JFrame {
         jLabel10.setText("Movil:");
 
         try {
-            TFtelPers.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#########")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        TFtelPers.setEnabled(false);
-
-        try {
             TFmovil.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#########")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
         TFmovil.setEnabled(false);
+        TFmovil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TFmovilActionPerformed(evt);
+            }
+        });
+
+        TFtelPers.setEnabled(false);
+        TFtelPers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TFtelPersActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -181,8 +216,8 @@ public class Cambio extends javax.swing.JFrame {
                     .addComponent(jLabel10))
                 .addGap(39, 39, 39)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(TFtelPers)
-                    .addComponent(TFmovil, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
+                    .addComponent(TFmovil, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                    .addComponent(TFtelPers))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -203,6 +238,11 @@ public class Cambio extends javax.swing.JFrame {
         jLabel11.setText("Salario:");
 
         TFsalario.setEnabled(false);
+        TFsalario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TFsalarioActionPerformed(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel12.setText("Fecha de nacimiento:");
@@ -224,6 +264,11 @@ public class Cambio extends javax.swing.JFrame {
         buttonGroup1.add(RBadministracion);
         RBadministracion.setText("ADMINISTRACION");
         RBadministracion.setEnabled(false);
+        RBadministracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RBadministracionActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(RBlogistica);
         RBlogistica.setText("LOGISTICA");
@@ -255,8 +300,18 @@ public class Cambio extends javax.swing.JFrame {
         jLabel14.setText("SEGUNDO APELLIDO");
 
         TFapellidoDos.setEnabled(false);
+        TFapellidoDos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TFapellidoDosActionPerformed(evt);
+            }
+        });
 
         DCfecha.setEnabled(false);
+        DCfecha.addSelectionChangedListener(new datechooser.events.SelectionChangedListener() {
+            public void onSelectionChange(datechooser.events.SelectionChangedEvent evt) {
+                DCfechaOnSelectionChange(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -361,28 +416,129 @@ public class Cambio extends javax.swing.JFrame {
             if(ejerciciofase2.EjercicioFase2.crearNuevo() == true){
                 TFdni.setEnabled(false);
                 TFnombre.setEnabled(true);
-                TFapellidoUno.setEnabled(true);
-                TFapellidoDos.setEnabled(true);
-                TFcalle.setEnabled(true);
-                TFpiso.setEnabled(true);
-                TFmano.setEnabled(true);
-                TFportal.setEnabled(true);
-                TFtelPers.setEnabled(true);
-                TFmovil.setEnabled(true);
-                TFsalario.setEnabled(true);
-                DCfecha.setEnabled(true);
-                Bguardar.setEnabled(true);
-                RBadministracion.setEnabled(true);
-                RBlogistica.setEnabled(true);
             }
-        }
-        else
+            else
             TFdni.setText("");
+        }
+        GenericoBD.cerrarConexion();
     }//GEN-LAST:event_TFdniActionPerformed
 
     private void BguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BguardarActionPerformed
-        GenericoBD.cerrarConexion();/*Esto lo ultimo*/
+        String opc = "";
+        if(RBadministracion.isSelected())
+            opc = "administracion";
+        else
+            if(RBlogistica.isSelected())
+                opc = "logistica";
+        
+        GenericoBD.abrirConexion();
+        PersonaBD.guardarPersona(TFnombre.getText(), TFapellidoUno.getText(), TFapellidoDos.getText(), TFcalle.getText(), TFportal.getText(), TFpiso.getText(), TFmano.getText(), TFtelPers.getText(), TFmovil.getText(), TFsalario.getText(), DCfecha.getSelectedDate(), opc);
     }//GEN-LAST:event_BguardarActionPerformed
+
+    private void TFnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFnombreActionPerformed
+        if(TFnombre.getText().isEmpty())
+            javax.swing.JOptionPane.showMessageDialog(null, "El campo no puede estar vacio");
+        else{
+            TFnombre.setEnabled(false);
+            TFapellidoUno.requestFocus();
+            TFapellidoUno.setEnabled(true);
+        }
+    }//GEN-LAST:event_TFnombreActionPerformed
+
+    private void TFapellidoUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFapellidoUnoActionPerformed
+        if(TFapellidoUno.getText().isEmpty())
+            javax.swing.JOptionPane.showMessageDialog(null, "El campo no puede estar vacio");
+        else{
+            TFapellidoUno.setEnabled(false);
+            TFapellidoDos.requestFocus();
+            TFapellidoDos.setEnabled(true);
+        }
+    }//GEN-LAST:event_TFapellidoUnoActionPerformed
+
+    private void TFapellidoDosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFapellidoDosActionPerformed
+        if(TFapellidoDos.getText().isEmpty())
+            javax.swing.JOptionPane.showMessageDialog(null, "El campo no puede estar vacio");
+        else{
+            TFapellidoDos.setEnabled(false);
+            TFcalle.requestFocus();
+            TFcalle.setEnabled(true);
+        }
+    }//GEN-LAST:event_TFapellidoDosActionPerformed
+
+    private void TFsalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFsalarioActionPerformed
+        TFsalario.setEnabled(false);
+        DCfecha.setEnabled(true);
+    }//GEN-LAST:event_TFsalarioActionPerformed
+
+    private void DCfechaOnSelectionChange(datechooser.events.SelectionChangedEvent evt) {//GEN-FIRST:event_DCfechaOnSelectionChange
+        DCfecha.setEnabled(false);
+        RBadministracion.setEnabled(true);
+        RBlogistica.setEnabled(true);
+    }//GEN-LAST:event_DCfechaOnSelectionChange
+
+    private void TFcalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFcalleActionPerformed
+        if(TFcalle.getText().isEmpty())
+            javax.swing.JOptionPane.showMessageDialog(null, "El campo no puede estar vacio");
+        else{
+            TFcalle.setEnabled(false);
+            TFportal.requestFocus();
+            TFportal.setEnabled(true);
+        }
+    }//GEN-LAST:event_TFcalleActionPerformed
+
+    private void TFportalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFportalActionPerformed
+        if(TFportal.getText().isEmpty())
+            javax.swing.JOptionPane.showMessageDialog(null, "El campo no puede estar vacio");
+        else{
+            TFportal.setEnabled(false);
+            TFpiso.requestFocus();
+            TFpiso.setEnabled(true);
+        }
+    }//GEN-LAST:event_TFportalActionPerformed
+
+    private void TFpisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFpisoActionPerformed
+        if(TFpiso.getText().isEmpty())
+            javax.swing.JOptionPane.showMessageDialog(null, "El campo no puede estar vacio");
+        else{
+            TFpiso.setEnabled(false);
+            TFmano.requestFocus();
+            TFmano.setEnabled(true);
+        }
+    }//GEN-LAST:event_TFpisoActionPerformed
+
+    private void TFmanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFmanoActionPerformed
+        if(TFmano.getText().isEmpty())
+            javax.swing.JOptionPane.showMessageDialog(null, "El campo no puede estar vacio");
+        else{
+            TFmano.setEnabled(false);
+            TFtelPers.requestFocus();
+            TFtelPers.setEnabled(true);
+        }
+    }//GEN-LAST:event_TFmanoActionPerformed
+
+    private void TFmovilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFmovilActionPerformed
+        if(TFmovil.getText().isEmpty())
+            javax.swing.JOptionPane.showMessageDialog(null, "El campo no puede estar vacio");
+        else{
+            TFmovil.setEnabled(false);
+            TFsalario.requestFocus();
+            TFsalario.setEnabled(true);
+        }
+    }//GEN-LAST:event_TFmovilActionPerformed
+
+    private void RBadministracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RBadministracionActionPerformed
+        if(RBadministracion.isSelected() || RBlogistica.isSelected()){
+            RBadministracion.setEnabled(false);
+            RBlogistica.setEnabled(false);
+            Bguardar.setEnabled(true);
+        }
+    }//GEN-LAST:event_RBadministracionActionPerformed
+
+    private void TFtelPersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFtelPersActionPerformed
+        TFtelPers.setEnabled(false);
+        TFmovil.setEnabled(true);
+        TFmovil.requestFocus();
+    }//GEN-LAST:event_TFtelPersActionPerformed
     
     /**
      * @param args the command line arguments
@@ -435,7 +591,7 @@ public class Cambio extends javax.swing.JFrame {
     private javax.swing.JTextField TFpiso;
     private javax.swing.JTextField TFportal;
     private javax.swing.JTextField TFsalario;
-    private javax.swing.JFormattedTextField TFtelPers;
+    private javax.swing.JTextField TFtelPers;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

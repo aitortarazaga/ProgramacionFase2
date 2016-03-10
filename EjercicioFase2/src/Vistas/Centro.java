@@ -11,6 +11,7 @@ public class Centro extends javax.swing.JFrame {
      */
     public Centro() {
         initComponents();
+        TFnombre.setEditable(false);
         jTextPane2.setEditable(false);
         GenericoBD.abrirConexion();
         
@@ -60,8 +61,6 @@ public class Centro extends javax.swing.JFrame {
                 CBidActionPerformed(evt);
             }
         });
-
-        TFnombre.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
