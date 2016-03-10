@@ -1,11 +1,10 @@
 
 package Vistas;
 
-import Clases.GenericoBD;
-import Clases.PersonaBD;
 import java.util.Calendar;
 import java.util.Locale;
 import EjercicioFase2.*;
+import Clases.*;
 
 public class Cambio extends javax.swing.JFrame {
 
@@ -411,6 +410,7 @@ public class Cambio extends javax.swing.JFrame {
 
     private void TFdniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFdniActionPerformed
         GenericoBD.abrirConexion();
+        
         if(PersonaBD.comprobarDni(TFdni.getText()) == null){
             ejerciciofase2.EjercicioFase2.mostrarNuevo();
             if(ejerciciofase2.EjercicioFase2.crearNuevo() == true){
@@ -420,6 +420,19 @@ public class Cambio extends javax.swing.JFrame {
             else
             TFdni.setText("");
         }
+        else{
+            TFdni.setText(PersonaBD.comprobarDni(TFdni.getText()).getDni());
+            TFnombre.setText(PersonaBD.comprobarDni(TFdni.getText()).getNombre());
+            TFapellidoUno.setText(PersonaBD.comprobarDni(TFdni.getText()).getApellido1());
+            TFapellidoDos.setText(PersonaBD.comprobarDni(TFdni.getText()).getApellido2());
+            TFcalle.setText(PersonaBD.comprobarDni(TFdni.getText()).getCalle());
+            TFportal.setText(PersonaBD.comprobarDni(TFdni.getText()).getPortal());
+            TFmano.setText(PersonaBD.comprobarDni(TFdni.getText()).getMano());
+            TFtelPers.setText(PersonaBD.comprobarDni(TFdni.getText()).getTelPers());
+            TFmovil.setText(PersonaBD.comprobarDni(TFdni.getText()).getTelMovil());
+            TFsalario.setText(PersonaBD.comprobarDni(TFdni.getText()).getSalario());
+        }
+            
         GenericoBD.cerrarConexion();
     }//GEN-LAST:event_TFdniActionPerformed
 
