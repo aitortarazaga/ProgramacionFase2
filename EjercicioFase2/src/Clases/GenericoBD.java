@@ -12,9 +12,9 @@ public class GenericoBD {
         try{
             Class.forName("oracle.jdbc.OracleDriver");
             
-            String login = "daw07";
-            String password = "daw07";
-            String url = "jdbc:oracle:thin:@SrvOracle :1521:orcl";
+            String login = "system";
+            String password = "oracle";
+            String url = "jdbc:oracle:thin:@10.10.10.9:1521:db12102";
             con = DriverManager.getConnection(url, login, password);
         }
         catch(Exception e){

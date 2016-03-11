@@ -13,9 +13,9 @@ public class CentroBD {
         
         try{
             Statement sentencia = GenericoBD.conexion().createStatement();
-            ResultSet centros = sentencia.executeQuery("select id from centros");
-            while(centros.next()){
-                ce.add(centros.getString("ID"));
+            ResultSet centro = sentencia.executeQuery("select id from centro");
+            while(centro.next()){
+                ce.add(centro.getString("ID"));
             }
         }
         catch(Exception e){
@@ -26,7 +26,8 @@ public class CentroBD {
     
     public static String llenarNombre(String id){
         String n = "";
-        String select = "select nombre from centros where id = " + id;
+        String select = "select nombre from centro where id = " + id;
+        
         
         try{
             Statement sentencia = GenericoBD.conexion().createStatement();

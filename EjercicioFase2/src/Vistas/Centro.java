@@ -39,6 +39,7 @@ public class Centro extends javax.swing.JFrame {
         CBid = new javax.swing.JComboBox();
         TFnombre = new javax.swing.JTextField();
         Bentrar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jScrollPane1.setViewportView(jTextPane1);
 
@@ -92,9 +93,17 @@ public class Centro extends javax.swing.JFrame {
         );
 
         Bentrar.setText("Entrar");
+        Bentrar.setEnabled(false);
         Bentrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BentrarActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -106,11 +115,14 @@ public class Centro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(100, 100, 100)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(106, Short.MAX_VALUE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 96, Short.MAX_VALUE)))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(Bentrar)
@@ -119,8 +131,13 @@ public class Centro extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton1)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
@@ -133,14 +150,21 @@ public class Centro extends javax.swing.JFrame {
 
     private void BentrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BentrarActionPerformed
         GenericoBD.cerrarConexion();
-        ejerciciofase2.EjercicioFase2.invisibleCentro();
+        ejerciciofase2.EjercicioFase2.cerrarCentro();
         ejerciciofase2.EjercicioFase2.mostrarCambio();
     }//GEN-LAST:event_BentrarActionPerformed
 
     private void CBidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBidActionPerformed
         String id = CBid.getSelectedItem().toString();
+        int idCentro = Integer.parseInt(id);
         TFnombre.setText(CentroBD.llenarNombre(id));
+        ejerciciofase2.EjercicioFase2.idCentro(idCentro);
+        Bentrar.setEnabled(true);
     }//GEN-LAST:event_CBidActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ejerciciofase2.EjercicioFase2.cerrarCentro();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,6 +205,7 @@ public class Centro extends javax.swing.JFrame {
     private javax.swing.JButton Bentrar;
     private javax.swing.JComboBox CBid;
     private javax.swing.JTextField TFnombre;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

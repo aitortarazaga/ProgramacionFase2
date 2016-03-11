@@ -8,6 +8,7 @@ import Clases.*;
 
 public class Cambio extends javax.swing.JFrame {
 
+    private static String opc = "";
     
     public Cambio() {
         initComponents();
@@ -44,13 +45,13 @@ public class Cambio extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         TFsalario = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        Bguardar = new javax.swing.JButton();
         Bsalir = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         RBadministracion = new javax.swing.JRadioButton();
         RBlogistica = new javax.swing.JRadioButton();
         jLabel14 = new javax.swing.JLabel();
         TFapellidoDos = new javax.swing.JTextField();
+        Bguardar = new javax.swing.JButton();
         DCfecha = new datechooser.beans.DateChooserCombo();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -246,17 +247,13 @@ public class Cambio extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel12.setText("Fecha de nacimiento:");
 
-        Bguardar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        Bguardar.setText("Guardar");
-        Bguardar.setEnabled(false);
-        Bguardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BguardarActionPerformed(evt);
-            }
-        });
-
         Bsalir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         Bsalir.setText("Salir");
+        Bsalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BsalirActionPerformed(evt);
+            }
+        });
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "TIPO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
@@ -273,6 +270,11 @@ public class Cambio extends javax.swing.JFrame {
         RBlogistica.setText("LOGISTICA");
         RBlogistica.setEnabled(false);
         RBlogistica.setFocusPainted(false);
+        RBlogistica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RBlogisticaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -305,6 +307,19 @@ public class Cambio extends javax.swing.JFrame {
             }
         });
 
+        Bguardar.setText("Guardar");
+        Bguardar.setEnabled(false);
+        Bguardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BguardarActionPerformed(evt);
+            }
+        });
+
+        try {
+            DCfecha.setDefaultPeriods(new datechooser.model.multiple.PeriodSet());
+        } catch (datechooser.model.exeptions.IncompatibleDataExeption e1) {
+            e1.printStackTrace();
+        }
         DCfecha.setEnabled(false);
         DCfecha.addSelectionChangedListener(new datechooser.events.SelectionChangedListener() {
             public void onSelectionChange(datechooser.events.SelectionChangedEvent evt) {
@@ -342,13 +357,13 @@ public class Cambio extends javax.swing.JFrame {
                                     .addGap(34, 34, 34)
                                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(60, 60, 60)
+                                .addGap(73, 73, 73)
                                 .addComponent(Bguardar)
-                                .addGap(166, 166, 166)
+                                .addGap(159, 159, 159)
                                 .addComponent(Bsalir))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel12)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(DCfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel11)
@@ -388,21 +403,21 @@ public class Cambio extends javax.swing.JFrame {
                                     .addComponent(TFapellidoDos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(49, 49, 49)))
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(TFsalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel12)
                     .addComponent(DCfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(65, 65, 65)
+                .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Bguardar)
-                    .addComponent(Bsalir))
-                .addGap(44, 44, 44))
+                    .addComponent(Bsalir)
+                    .addComponent(Bguardar))
+                .addGap(193, 193, 193))
         );
 
         pack();
@@ -421,32 +436,33 @@ public class Cambio extends javax.swing.JFrame {
             TFdni.setText("");
         }
         else{
+            TFdni.setEnabled(false);
             TFdni.setText(PersonaBD.comprobarDni(TFdni.getText()).getDni());
             TFnombre.setText(PersonaBD.comprobarDni(TFdni.getText()).getNombre());
             TFapellidoUno.setText(PersonaBD.comprobarDni(TFdni.getText()).getApellido1());
             TFapellidoDos.setText(PersonaBD.comprobarDni(TFdni.getText()).getApellido2());
             TFcalle.setText(PersonaBD.comprobarDni(TFdni.getText()).getCalle());
             TFportal.setText(PersonaBD.comprobarDni(TFdni.getText()).getPortal());
+            String p = Integer.toString(PersonaBD.comprobarDni(TFdni.getText()).getPiso());
+            TFpiso.setText(p);
             TFmano.setText(PersonaBD.comprobarDni(TFdni.getText()).getMano());
             TFtelPers.setText(PersonaBD.comprobarDni(TFdni.getText()).getTelPers());
             TFmovil.setText(PersonaBD.comprobarDni(TFdni.getText()).getTelMovil());
-            TFsalario.setText(PersonaBD.comprobarDni(TFdni.getText()).getSalario());
+            String s = Float.toString(PersonaBD.comprobarDni(TFdni.getText()).getSalario());
+            TFsalario.setText(s);
+            if(PersonaBD.cargo().compareToIgnoreCase("administracion") == 0)
+                RBadministracion.setSelected(true);
+            else
+                if(PersonaBD.cargo().compareToIgnoreCase("logistica") == 0)
+                    RBlogistica.setSelected(true);
+            ejerciciofase2.EjercicioFase2.guardarDni(TFdni.getText());
+            ejerciciofase2.EjercicioFase2.mostrarOpcion();
+            if(ejerciciofase2.EjercicioFase2.o() == true)
+                TFnombre.setEnabled(true);
         }
             
         GenericoBD.cerrarConexion();
     }//GEN-LAST:event_TFdniActionPerformed
-
-    private void BguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BguardarActionPerformed
-        String opc = "";
-        if(RBadministracion.isSelected())
-            opc = "administracion";
-        else
-            if(RBlogistica.isSelected())
-                opc = "logistica";
-        
-        GenericoBD.abrirConexion();
-        PersonaBD.guardarPersona(TFnombre.getText(), TFapellidoUno.getText(), TFapellidoDos.getText(), TFcalle.getText(), TFportal.getText(), TFpiso.getText(), TFmano.getText(), TFtelPers.getText(), TFmovil.getText(), TFsalario.getText(), DCfecha.getSelectedDate(), opc);
-    }//GEN-LAST:event_BguardarActionPerformed
 
     private void TFnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFnombreActionPerformed
         if(TFnombre.getText().isEmpty())
@@ -479,11 +495,14 @@ public class Cambio extends javax.swing.JFrame {
     }//GEN-LAST:event_TFapellidoDosActionPerformed
 
     private void TFsalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFsalarioActionPerformed
+        if(TFsalario.getText().isEmpty())
+            TFsalario.setText(null);
         TFsalario.setEnabled(false);
         DCfecha.setEnabled(true);
     }//GEN-LAST:event_TFsalarioActionPerformed
 
     private void DCfechaOnSelectionChange(datechooser.events.SelectionChangedEvent evt) {//GEN-FIRST:event_DCfechaOnSelectionChange
+        
         DCfecha.setEnabled(false);
         RBadministracion.setEnabled(true);
         RBlogistica.setEnabled(true);
@@ -540,6 +559,7 @@ public class Cambio extends javax.swing.JFrame {
     }//GEN-LAST:event_TFmovilActionPerformed
 
     private void RBadministracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RBadministracionActionPerformed
+        opc = "administracion";
         if(RBadministracion.isSelected() || RBlogistica.isSelected()){
             RBadministracion.setEnabled(false);
             RBlogistica.setEnabled(false);
@@ -548,10 +568,38 @@ public class Cambio extends javax.swing.JFrame {
     }//GEN-LAST:event_RBadministracionActionPerformed
 
     private void TFtelPersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFtelPersActionPerformed
+        if(TFtelPers.getText().isEmpty())
+            TFtelPers.setText(null);
         TFtelPers.setEnabled(false);
         TFmovil.setEnabled(true);
         TFmovil.requestFocus();
     }//GEN-LAST:event_TFtelPersActionPerformed
+
+    private void BguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BguardarActionPerformed
+        if(RBadministracion.isSelected())
+            opc = "administracion";
+        else
+            if(RBlogistica.isSelected())
+                opc = "logistica";
+
+        GenericoBD.abrirConexion();
+        PersonaBD.guardarPersona(TFdni.getText(), TFnombre.getText(), TFapellidoUno.getText(), TFapellidoDos.getText(), TFcalle.getText(), TFportal.getText(), TFpiso.getText(), TFmano.getText(), TFtelPers.getText(), TFmovil.getText(), TFsalario.getText(), DCfecha.getSelectedDate(), opc);
+        ejerciciofase2.EjercicioFase2.reiniciarCambio();
+        GenericoBD.cerrarConexion();
+    }//GEN-LAST:event_BguardarActionPerformed
+
+    private void RBlogisticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RBlogisticaActionPerformed
+        opc = "logistica";
+        if(RBadministracion.isSelected() || RBlogistica.isSelected()){
+            RBadministracion.setEnabled(false);
+            RBlogistica.setEnabled(false);
+            Bguardar.setEnabled(true);
+        }
+    }//GEN-LAST:event_RBlogisticaActionPerformed
+
+    private void BsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BsalirActionPerformed
+        ejerciciofase2.EjercicioFase2.cerrarCambio();
+    }//GEN-LAST:event_BsalirActionPerformed
     
     /**
      * @param args the command line arguments
