@@ -14,7 +14,7 @@ CREATE TABLE centro
                         START WITH 1  
                         NOORDER  
                         NOCYCLE  NOT NULL ENABLE
-      CONSTRAINT centro_id_pk PRIMARY KEY ,
+      CONSTRAINT cent_id_pk PRIMARY KEY ,
     nombre    VARCHAR2 (30) NOT NULL ,
     calle     VARCHAR2 (30) NOT NULL,
     numero    NUMBER (2) NOT NULL,

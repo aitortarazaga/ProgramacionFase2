@@ -5,6 +5,12 @@ import java.util.Calendar;
 import java.util.Locale;
 import EjercicioFase2.*;
 import Clases.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Cambio extends javax.swing.JFrame {
 
@@ -12,6 +18,7 @@ public class Cambio extends javax.swing.JFrame {
     
     public Cambio() {
         initComponents();
+        
         
     }
 
@@ -376,7 +383,7 @@ public class Cambio extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -395,7 +402,7 @@ public class Cambio extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, Short.MAX_VALUE))
+                                .addGap(18, 21, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -403,7 +410,7 @@ public class Cambio extends javax.swing.JFrame {
                                     .addComponent(TFapellidoDos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(49, 49, 49)))
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -448,17 +455,50 @@ public class Cambio extends javax.swing.JFrame {
             TFmano.setText(PersonaBD.comprobarDni(TFdni.getText()).getMano());
             TFtelPers.setText(PersonaBD.comprobarDni(TFdni.getText()).getTelPers());
             TFmovil.setText(PersonaBD.comprobarDni(TFdni.getText()).getTelMovil());
-            String s = Float.toString(PersonaBD.comprobarDni(TFdni.getText()).getSalario());
+            System.out.println(PersonaBD.comprobarDni(TFdni.getText()).getFecha_nac());
+            Calendar fecha = null;
+                java.util.Date fechasql = PersonaBD.comprobarDni(TFdni.getText()).getFecha_nac();
+                if(fechasql != null){
+                    fecha = new GregorianCalendar();
+                    fecha.setTime(fechasql);
+                }
+            DCfecha.setSelectedDate(fecha);
+            /*Date date = PersonaBD.comprobarDni(TFdni.getText()).getFecha_nac();
+            
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String fecha = sdf.format(date);
+            
+            Date date1;
+            try {
+                date1 = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(date1);
+                DCfecha.setSelectedDate(cal);
+            } catch (ParseException ex) {
+                Logger.getLogger(Cambio.class.getName()).log(Level.SEVERE, null, ex);
+            }*/
+            
+            //DCfecha.setDate(PersonaBD.comprobarDni(TFdni.getText()).getFecha_nac());
+            
+            String s;
+            if(PersonaBD.comprobarDni(TFdni.getText()).getSalario() == 0)
+                s = "";
+            else
+                s = Float.toString(PersonaBD.comprobarDni(TFdni.getText()).getSalario());
             TFsalario.setText(s);
             if(PersonaBD.cargo().compareToIgnoreCase("administracion") == 0)
                 RBadministracion.setSelected(true);
             else
                 if(PersonaBD.cargo().compareToIgnoreCase("logistica") == 0)
                     RBlogistica.setSelected(true);
+            RBadministracion.setEnabled(false);
+            RBlogistica.setEnabled(false);
             ejerciciofase2.EjercicioFase2.guardarDni(TFdni.getText());
             ejerciciofase2.EjercicioFase2.mostrarOpcion();
-            if(ejerciciofase2.EjercicioFase2.o() == true)
+            if(ejerciciofase2.EjercicioFase2.o() == true){
                 TFnombre.setEnabled(true);
+                TFnombre.requestFocus();
+            }
         }
             
         GenericoBD.cerrarConexion();
@@ -495,8 +535,7 @@ public class Cambio extends javax.swing.JFrame {
     }//GEN-LAST:event_TFapellidoDosActionPerformed
 
     private void TFsalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFsalarioActionPerformed
-        if(TFsalario.getText().isEmpty())
-            TFsalario.setText(null);
+        
         TFsalario.setEnabled(false);
         DCfecha.setEnabled(true);
     }//GEN-LAST:event_TFsalarioActionPerformed
@@ -568,8 +607,7 @@ public class Cambio extends javax.swing.JFrame {
     }//GEN-LAST:event_RBadministracionActionPerformed
 
     private void TFtelPersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFtelPersActionPerformed
-        if(TFtelPers.getText().isEmpty())
-            TFtelPers.setText(null);
+        
         TFtelPers.setEnabled(false);
         TFmovil.setEnabled(true);
         TFmovil.requestFocus();
@@ -583,7 +621,11 @@ public class Cambio extends javax.swing.JFrame {
                 opc = "logistica";
 
         GenericoBD.abrirConexion();
-        PersonaBD.guardarPersona(TFdni.getText(), TFnombre.getText(), TFapellidoUno.getText(), TFapellidoDos.getText(), TFcalle.getText(), TFportal.getText(), TFpiso.getText(), TFmano.getText(), TFtelPers.getText(), TFmovil.getText(), TFsalario.getText(), DCfecha.getSelectedDate(), opc);
+        if(ejerciciofase2.EjercicioFase2.o() == false)
+            PersonaBD.guardarPersona(TFdni.getText(), TFnombre.getText(), TFapellidoUno.getText(), TFapellidoDos.getText(), TFcalle.getText(), TFportal.getText(), TFpiso.getText(), TFmano.getText(), TFtelPers.getText(), TFmovil.getText(), TFsalario.getText(), DCfecha.getSelectedDate(), opc);
+        else
+            if(ejerciciofase2.EjercicioFase2.o() == true)
+                PersonaBD.editarPersona(TFdni.getText(), TFnombre.getText(), TFapellidoUno.getText(), TFapellidoDos.getText(), TFcalle.getText(), TFportal.getText(), TFpiso.getText(), TFmano.getText(), TFtelPers.getText(), TFmovil.getText(), TFsalario.getText(), DCfecha.getSelectedDate(), opc);
         ejerciciofase2.EjercicioFase2.reiniciarCambio();
         GenericoBD.cerrarConexion();
     }//GEN-LAST:event_BguardarActionPerformed

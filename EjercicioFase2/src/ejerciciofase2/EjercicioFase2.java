@@ -12,14 +12,14 @@ public class EjercicioFase2 {
     private static boolean nuevo;
     private static int id;
     private static Opcion op;
-    private static boolean o;
+    private static boolean opc;
     private static String Dni;
     
     public static void main(String[] args) {
         
         ce = new Centro();
-        ce.setVisible(true);
         ce.setLocationRelativeTo(null);
+        ce.setVisible(true);
     }
     
     public static void cerrarCentro(){
@@ -70,12 +70,12 @@ public class EjercicioFase2 {
         op.dispose();
     }
     
-    public static void guardarBoolean(){
-        o = true;
+    public static void guardarBoolean(boolean o){
+        opc = o;
     }
     
     public static boolean o(){
-        return o;
+        return opc;
     }
     
     public static void reiniciarCambio(){
@@ -86,7 +86,7 @@ public class EjercicioFase2 {
     }
     
     public static void reiniciarBoolean(){
-        o = false;
+        opc = false;
     }
     
     public static void cerrarCambio(){

@@ -109,7 +109,8 @@ public class Opcion extends javax.swing.JDialog {
     }//GEN-LAST:event_BborrarActionPerformed
 
     private void BeditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BeditarActionPerformed
-        ejerciciofase2.EjercicioFase2.guardarBoolean();
+        boolean o = true;
+        ejerciciofase2.EjercicioFase2.guardarBoolean(o);
         ejerciciofase2.EjercicioFase2.cerrarOpcion();
         
     }//GEN-LAST:event_BeditarActionPerformed

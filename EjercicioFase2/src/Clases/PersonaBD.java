@@ -6,6 +6,7 @@ import java.sql.Statement;
 import java.util.Calendar;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 
 public class PersonaBD {
     
@@ -24,30 +25,21 @@ public class PersonaBD {
             Statement sentencia = GenericoBD.conexion().createStatement();
             ResultSet persona = sentencia.executeQuery(select1);
             if(persona.next()){
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-                    String dateInString = "22-01-2015 10:20:56";
-                    Date date = sdf.parse(dateInString);
-
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTime(date);
+               
                     
                 dni = persona.getString("DNI");
-                per = new Persona(persona.getString("DNI"),persona.getString("NOMBRE"),persona.getString("APELLIDO1"),persona.getString("APELLIDO2"),persona.getString("CALLE"),persona.getInt("PISO"),persona.getString("MANO"),persona.getString("PORTAL"),persona.getString("TELEMPRESA"),persona.getString("TELPERSONAL"),persona.getFloat("SALARIO"),null);
+                
+                per = new Persona(persona.getString("DNI"),persona.getString("NOMBRE"),persona.getString("APELLIDO1"),persona.getString("APELLIDO2"),persona.getString("CALLE"),persona.getInt("PISO"),persona.getString("MANO"),persona.getString("PORTAL"),persona.getString("TELEMPRESA"),persona.getString("TELPERSONAL"),persona.getFloat("SALARIO"),persona.getDate("FECHANAC"));
+                
                 
                 cargo = "administracion";
             }
             else{
                 persona = sentencia.executeQuery(select2);
                 if(persona.next()){
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-                        String dateInString = "22-01-2015 10:20:56";
-                        Date date = sdf.parse(dateInString);
-
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.setTime(date);
                         
                 dni = persona.getString("DNI");
-                per = new Persona(persona.getString("DNI"),persona.getString("NOMBRE"),persona.getString("APELLIDO1"),persona.getString("APELLIDO2"),persona.getString("CALLE"),persona.getInt("PISO"),persona.getString("MANO"),persona.getString("PORTAL"),persona.getString("TELEMPRESA"),persona.getString("TELPERSONAL"),persona.getFloat("SALARIO"),calendar);
+                per = new Persona(persona.getString("DNI"),persona.getString("NOMBRE"),persona.getString("APELLIDO1"),persona.getString("APELLIDO2"),persona.getString("CALLE"),persona.getInt("PISO"),persona.getString("MANO"),persona.getString("PORTAL"),persona.getString("TELEMPRESA"),persona.getString("TELPERSONAL"),persona.getFloat("SALARIO"),persona.getDate("FECHANAC"));
                 
                 cargo = "logistica";
                 }
@@ -60,10 +52,17 @@ public class PersonaBD {
     }
     
     public static void guardarPersona(String dni, String nombre, String apellido1, String apellido2, String calle, String portal, String piso, String mano, String telPers, String telMovil, String salario, Calendar fecha, String opc){
-        fecha = Calendar.getInstance();
-        Date date = fecha.getTime();  
         
-        String secuencia = "INSERT INTO " + opc + " (dni,NOMBRE,APELLIDO1,APELLIDO2,CALLE,PORTAL,PISO,MANO,TELEMPRESA,TELPERSONAL,FECHANAC,SALARIO,IDCENTRO) VALUES('" + dni + "','" + nombre + "','" + apellido1 + "','" + apellido2 + "','" + calle + "'," + portal + "," + piso + ",'" + mano + "','" + telMovil + "','" + telPers + "',null," + salario + "," + ejerciciofase2.EjercicioFase2.guardarCentro() + ")";
+        if(salario.isEmpty())
+            salario = null;
+        if(telPers.isEmpty())
+            telPers = null;
+        else
+            telPers = "'" + telPers + "'";
+        
+        java.sql.Date fechasql = new java.sql.Date(fecha.getTime().getTime());
+        
+        String secuencia = "INSERT INTO " + opc + " (dni,NOMBRE,APELLIDO1,APELLIDO2,CALLE,PORTAL,PISO,MANO,TELEMPRESA,TELPERSONAL,FECHANAC,SALARIO,IDCENTRO) VALUES('" + dni + "','" + nombre + "','" + apellido1 + "','" + apellido2 + "','" + calle + "'," + portal + "," + piso + ",'" + mano + "','" + telMovil + "'," + telPers + ",TO_DATE('" + fechasql + "','YYYY-MM-DD')," + salario + "," + ejerciciofase2.EjercicioFase2.guardarCentro() + ")";
         
         try{
         Statement sentencia = GenericoBD.conexion().createStatement();
@@ -80,6 +79,7 @@ public class PersonaBD {
         try{
         Statement sentencia = GenericoBD.conexion().createStatement();
         sentencia.executeUpdate(secuencia);
+        per = null;
         }
         catch(Exception e){
             javax.swing. JOptionPane . showMessageDialog (null ," Problemas"+e. getMessage ());
@@ -88,5 +88,26 @@ public class PersonaBD {
     
     public static String cargo(){
         return cargo;
+    }
+    
+    public static void editarPersona(String dni, String nombre, String apellido1, String apellido2, String calle, String portal, String piso, String mano, String telPers, String telMovil, String salario, Calendar fecha, String opc){
+        
+        if(salario.isEmpty())
+            salario = null;
+        
+        else
+            telPers = "'" + telPers + "'";
+        
+        java.sql.Date fechasql = new java.sql.Date(fecha.getTime().getTime());
+        
+        String secuencia = "UPDATE " + opc + " SET NOMBRE = '" + nombre + "', APELLIDO1 = '" + apellido1 + "', APELLIDO2 = '" + apellido2 + "', CALLE = '" + calle + "', PORTAL = " + portal + ", PISO = " + piso + ", MANO = '" + mano + "', TELEMPRESA = '" + telMovil + ", TELPERSONAL = " + telPers + ", SALARIO = " + salario + ", FECHANAC = TO_DATE('" + fechasql + "','YYYY-MM-DD')";
+        
+        try{
+        Statement sentencia = GenericoBD.conexion().createStatement();
+        sentencia.executeUpdate(secuencia);
+        }
+        catch(Exception e){
+            javax.swing. JOptionPane . showMessageDialog (null ," Problemas"+e. getMessage ());
+        }
     }
 }

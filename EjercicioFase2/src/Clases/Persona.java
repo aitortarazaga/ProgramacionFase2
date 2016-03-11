@@ -2,6 +2,7 @@
 package Clases;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class Persona {
     private String dni;
@@ -15,9 +16,9 @@ public class Persona {
     private String telMovil;
     private String telPers;
     private float salario;
-    private Calendar fecha_nac;
+    private Date fecha_nac;
 
-    public Persona(String dni, String nombre, String apellido1, String apellido2, String calle, int piso, String mano, String portal, String telMovil, String telPers, float salario, Calendar fecha_nac) {
+    public Persona(String dni, String nombre, String apellido1, String apellido2, String calle, int piso, String mano, String portal, String telMovil, String telPers, float salario, Date fecha_nac) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido1 = apellido1;
@@ -120,11 +121,11 @@ public class Persona {
         this.salario = salario;
     }
 
-    public Calendar getFecha_nac() {
+    public Date getFecha_nac() {
         return fecha_nac;
     }
 
-    public void setFecha_nac(Calendar fecha_nac) {
+    public void setFecha_nac(Date fecha_nac) {
         this.fecha_nac = fecha_nac;
     }
 
