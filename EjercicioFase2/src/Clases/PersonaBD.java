@@ -74,7 +74,7 @@ public class PersonaBD {
     }
     
     public static void borrarPersona(){
-        String secuencia = "delete from administracion where dni = '" + ejerciciofase2.EjercicioFase2.recogerDni() + "'";
+        String secuencia = "delete from " + cargo + " where dni = '" + ejerciciofase2.EjercicioFase2.recogerDni() + "'";
         
         try{
         Statement sentencia = GenericoBD.conexion().createStatement();
@@ -91,20 +91,27 @@ public class PersonaBD {
     }
     
     public static void editarPersona(String dni, String nombre, String apellido1, String apellido2, String calle, String portal, String piso, String mano, String telPers, String telMovil, String salario, Calendar fecha, String opc){
-        
         if(salario.isEmpty())
             salario = null;
+        if(telPers.isEmpty())
+            telPers = null;
         
-        else
-            telPers = "'" + telPers + "'";
         
         java.sql.Date fechasql = new java.sql.Date(fecha.getTime().getTime());
         
-        String secuencia = "UPDATE " + opc + " SET NOMBRE = '" + nombre + "', APELLIDO1 = '" + apellido1 + "', APELLIDO2 = '" + apellido2 + "', CALLE = '" + calle + "', PORTAL = " + portal + ", PISO = " + piso + ", MANO = '" + mano + "', TELEMPRESA = '" + telMovil + ", TELPERSONAL = " + telPers + ", SALARIO = " + salario + ", FECHANAC = TO_DATE('" + fechasql + "','YYYY-MM-DD')";
-        
+        String actualizar = "UPDATE " + opc + " SET NOMBRE = '" + nombre + "', APELLIDO1 = '" + apellido1 + "', APELLIDO2 = '" + apellido2 + "', CALLE = '" + calle + "', PORTAL = " + portal + ", PISO = " + piso + ", MANO = '" + mano + "', TELEMPRESA = '" + telMovil + "', TELPERSONAL = " + telPers + ", SALARIO = " + salario + ", FECHANAC = TO_DATE('" + fechasql + "','YYYY-MM-DD')";
+        String borrar = "DELETE FROM " + cargo + " WHERE DNI = '" + dni + "'";
+        String crear = "INSERT INTO " + opc + " (dni,NOMBRE,APELLIDO1,APELLIDO2,CALLE,PORTAL,PISO,MANO,TELEMPRESA,TELPERSONAL,FECHANAC,SALARIO,IDCENTRO) VALUES('" + dni + "','" + nombre + "','" + apellido1 + "','" + apellido2 + "','" + calle + "'," + portal + "," + piso + ",'" + mano + "','" + telMovil + "'," + telPers + ",TO_DATE('" + fechasql + "','YYYY-MM-DD')," + salario + "," + ejerciciofase2.EjercicioFase2.guardarCentro() + ")";
+                
         try{
         Statement sentencia = GenericoBD.conexion().createStatement();
-        sentencia.executeUpdate(secuencia);
+        if(cargo.compareToIgnoreCase(opc) == 0)
+            sentencia.executeUpdate(actualizar);
+        else{
+            sentencia.executeUpdate(crear);
+            sentencia.executeUpdate(borrar);
+        }
+            
         }
         catch(Exception e){
             javax.swing. JOptionPane . showMessageDialog (null ," Problemas"+e. getMessage ());
