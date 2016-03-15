@@ -1,6 +1,8 @@
 
 package Clases;
 
+import java.util.ArrayList;
+
 
 public class Centros {
     private String id;
@@ -11,9 +13,9 @@ public class Centros {
     private String ciudad;
     private String provincia;
     private String telefono;
-    private Persona per;
+    private ArrayList<Persona> per;
 
-    public Centros(String id, String nombre, String calle, int numero, int cp, String ciudad, String provincia, String telefono, Persona per) {
+    public Centros(String id, String nombre, String calle, int numero, int cp, String ciudad, String provincia, String telefono, ArrayList<Persona> per) {
         this.id = id;
         this.nombre = nombre;
         this.calle = calle;
@@ -89,11 +91,11 @@ public class Centros {
         this.telefono = telefono;
     }
 
-    public Persona getPer() {
+    public ArrayList<Persona> getPer() {
         return per;
     }
 
-    public void setPer(Persona per) {
+    public void setPer(ArrayList<Persona> per) {
         this.per = per;
     }
 

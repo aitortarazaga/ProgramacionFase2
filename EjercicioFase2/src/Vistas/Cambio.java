@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Locale;
 import EjercicioFase2.*;
 import Clases.*;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -456,6 +457,24 @@ public class Cambio extends javax.swing.JFrame {
             TFtelPers.setText(PersonaBD.comprobarDni(TFdni.getText()).getTelPers());
             TFmovil.setText(PersonaBD.comprobarDni(TFdni.getText()).getTelMovil());
             System.out.println(PersonaBD.comprobarDni(TFdni.getText()).getFecha_nac());
+            
+            
+            Calendar cal = null;
+            Date date = PersonaBD.comprobarDni(TFdni.getText()).getFecha_nac();
+            
+               
+                DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+            try { 
+                date = (Date)formatter.parse(date.toString());
+            } catch (ParseException ex) {
+                Logger.getLogger(Cambio.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                cal=Calendar.getInstance();
+                cal.setTime(PersonaBD.comprobarDni(TFdni.getText()).getFecha_nac());
+            
+            
+            DCfecha.setSelectedDate(cal);
+            /*
             Calendar fecha = null;
                 java.util.Date fechasql = PersonaBD.comprobarDni(TFdni.getText()).getFecha_nac();
                 if(fechasql != null){
@@ -463,6 +482,7 @@ public class Cambio extends javax.swing.JFrame {
                     fecha.setTime(fechasql);
                 }
             DCfecha.setSelectedDate(fecha);
+            */
             /*Date date = PersonaBD.comprobarDni(TFdni.getText()).getFecha_nac();
             
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
