@@ -29,8 +29,17 @@ public class PersonaBD {
                     
                 dni = persona.getString("DNI");
                 
-                per = new Persona(persona.getString("DNI"),persona.getString("NOMBRE"),persona.getString("APELLIDO1"),persona.getString("APELLIDO2"),persona.getString("CALLE"),persona.getInt("PISO"),persona.getString("MANO"),persona.getString("PORTAL"),persona.getString("TELEMPRESA"),persona.getString("TELPERSONAL"),persona.getFloat("SALARIO"),persona.getDate("FECHANAC"));
-                
+                per.setDni(persona.getString("DNI"));
+                per.setNombre(persona.getString("NOMBRE"));
+                per.setApellido1(persona.getString("APELLIDO1"));
+                per.setApellido2(persona.getString("APELLIDO2"));
+                per.setCalle(persona.getString("CALLE"));
+                per.setPiso(persona.getInt("PISO"));
+                per.setMano(persona.getString("MANO"));
+                per.setPortal(persona.getString("PORTAL"));
+                per.setTelMovil(persona.getString("TELEMPRESA"));
+                per.setTelPers(persona.getString("TELPERSONAL"));
+                per.setFecha_nac(new java.util.Date(persona.getDate("FECHANAC").getTime()));
                 
                 cargo = "administracion";
             }

@@ -459,21 +459,6 @@ public class Cambio extends javax.swing.JFrame {
             System.out.println(PersonaBD.comprobarDni(TFdni.getText()).getFecha_nac());
             
             
-            Calendar cal = null;
-            Date date = PersonaBD.comprobarDni(TFdni.getText()).getFecha_nac();
-            
-               
-                DateFormat formatter = new SimpleDateFormat("yyyyMMdd");
-            try { 
-                date = (Date)formatter.parse(date.toString());
-            } catch (ParseException ex) {
-                Logger.getLogger(Cambio.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                cal=Calendar.getInstance();
-                cal.setTime(PersonaBD.comprobarDni(TFdni.getText()).getFecha_nac());
-            
-            
-            DCfecha.setSelectedDate(cal);
             /*
             Calendar fecha = null;
                 java.util.Date fechasql = PersonaBD.comprobarDni(TFdni.getText()).getFecha_nac();
