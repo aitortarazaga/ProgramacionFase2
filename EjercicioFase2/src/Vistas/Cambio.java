@@ -456,9 +456,11 @@ public class Cambio extends javax.swing.JFrame {
             TFmano.setText(PersonaBD.comprobarDni(TFdni.getText()).getMano());
             TFtelPers.setText(PersonaBD.comprobarDni(TFdni.getText()).getTelPers());
             TFmovil.setText(PersonaBD.comprobarDni(TFdni.getText()).getTelMovil());
+            System.out.println(EjercicioFase2.getFechaNac());
+            DCfecha.setSelectedDate(EjercicioFase2.getFechaNac());
             String s;
             if(PersonaBD.comprobarDni(TFdni.getText()).getSalario() == 0)
-                s = "";
+                s = null;
             else
                 s = Float.toString(PersonaBD.comprobarDni(TFdni.getText()).getSalario());
             TFsalario.setText(s);

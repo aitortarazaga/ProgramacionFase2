@@ -109,7 +109,7 @@ public class EjercicioFase2 {
     public static java.util.Calendar getFechaNac(){
          // java.util.Date a Calendar
         java.util.Calendar cal = Calendar.getInstance();
-        cal.setTime(PersonaBD.comprobarDni(Dni).getFecha_nac());
+        cal.setTime(PersonaBD.getPersona().getFecha_nac());
         return cal;
      }
     

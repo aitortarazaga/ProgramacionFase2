@@ -30,6 +30,7 @@ public class LogisticaBD {
                 per.setPortal(persona.getString("PORTAL"));
                 per.setTelMovil(persona.getString("TELEMPRESA"));
                 per.setTelPers(persona.getString("TELPERSONAL"));
+                per.setSalario(persona.getFloat("SALARIO"));
                 per.setFecha_nac(new java.util.Date(persona.getDate("FECHANAC").getTime()));
             }
             GenericoBD.cerrarConexion();
@@ -91,9 +92,9 @@ public class LogisticaBD {
         
         java.sql.Date fechasql = new java.sql.Date(fecha.getTime().getTime());
         
-        String actualizar = "UPDATE administracion SET NOMBRE = '" + nombre + "', APELLIDO1 = '" + apellido1 + "', APELLIDO2 = '" + apellido2 + "', CALLE = '" + calle + "', PORTAL = " + portal + ", PISO = " + piso + ", MANO = '" + mano + "', TELEMPRESA = '" + telMovil + "', TELPERSONAL = " + telPers + ", SALARIO = " + salario + ", FECHANAC = TO_DATE('" + fechasql + "','YYYY-MM-DD')";
+        String actualizar = "UPDATE logistica SET NOMBRE = '" + nombre + "', APELLIDO1 = '" + apellido1 + "', APELLIDO2 = '" + apellido2 + "', CALLE = '" + calle + "', PORTAL = " + portal + ", PISO = " + piso + ", MANO = '" + mano + "', TELEMPRESA = '" + telMovil + "', TELPERSONAL = " + telPers + ", SALARIO = " + salario + ", FECHANAC = TO_DATE('" + fechasql + "','YYYY-MM-DD')";
         String borrar = "DELETE FROM administracion WHERE DNI = '" + dni + "'";
-        String crear = "INSERT INTO administracion (dni,NOMBRE,APELLIDO1,APELLIDO2,CALLE,PORTAL,PISO,MANO,TELEMPRESA,TELPERSONAL,FECHANAC,SALARIO,IDCENTRO) VALUES('" + dni + "','" + nombre + "','" + apellido1 + "','" + apellido2 + "','" + calle + "'," + portal + "," + piso + ",'" + mano + "','" + telMovil + "'," + telPers + ",TO_DATE('" + fechasql + "','YYYY-MM-DD')," + salario + "," + ejerciciofase2.EjercicioFase2.guardarCentro() + ")";
+        String crear = "INSERT INTO logistica (dni,NOMBRE,APELLIDO1,APELLIDO2,CALLE,PORTAL,PISO,MANO,TELEMPRESA,TELPERSONAL,FECHANAC,SALARIO,IDCENTRO) VALUES('" + dni + "','" + nombre + "','" + apellido1 + "','" + apellido2 + "','" + calle + "'," + portal + "," + piso + ",'" + mano + "','" + telMovil + "'," + telPers + ",TO_DATE('" + fechasql + "','YYYY-MM-DD')," + salario + "," + ejerciciofase2.EjercicioFase2.guardarCentro() + ")";
                 
         try{
             GenericoBD.abrirConexion();

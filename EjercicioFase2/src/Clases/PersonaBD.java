@@ -62,4 +62,8 @@ public class PersonaBD {
     public static String cargo(){
         return cargo;
     }
+    
+    public static Persona getPersona(){
+        return per;
+    }
 }
