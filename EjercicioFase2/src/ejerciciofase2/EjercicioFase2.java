@@ -3,6 +3,7 @@ package ejerciciofase2;
 
 import Clases.*;
 import Vistas.*;
+import java.util.Calendar;
 
 public class EjercicioFase2 {
 
@@ -14,6 +15,7 @@ public class EjercicioFase2 {
     private static Opcion op;
     private static boolean opc;
     private static String Dni;
+    private static boolean visualizar;
     
     public static void main(String[] args) {
         
@@ -102,5 +104,20 @@ public class EjercicioFase2 {
     
     public static String recogerDni(){
         return Dni;
+    }
+    
+    public static java.util.Calendar getFechaNac(){
+         // java.util.Date a Calendar
+        java.util.Calendar cal = Calendar.getInstance();
+        cal.setTime(PersonaBD.comprobarDni(Dni).getFecha_nac());
+        return cal;
+     }
+    
+    public static void visualizar(){
+        visualizar = true;
+    }
+    
+    public static boolean getVisualizar(){
+        return visualizar;
     }
 }

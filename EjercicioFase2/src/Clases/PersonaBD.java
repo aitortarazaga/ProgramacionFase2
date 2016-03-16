@@ -12,118 +12,54 @@ public class PersonaBD {
     
     private static String cargo;
     private static String dni;
-    private static Persona per = null;
-    private static String o;
+    private static Persona per;
     
-    public static Persona comprobarDni(String dni){
+    public static Persona comprobarDni(String d){
+        dni = d;
         
-        String select1 = "select * from administracion where dni = '" + dni + "'";
-        String select2 = "select * from logistica where dni = '" + dni + "'";
+        per = AdministracionBD.comprobarDniAdm(d);
+        cargo = "administracion";
         
-        
-        try{
-            Statement sentencia = GenericoBD.conexion().createStatement();
-            ResultSet persona = sentencia.executeQuery(select1);
-            if(persona.next()){
-               
-                    
-                dni = persona.getString("DNI");
-                
-                per.setDni(persona.getString("DNI"));
-                per.setNombre(persona.getString("NOMBRE"));
-                per.setApellido1(persona.getString("APELLIDO1"));
-                per.setApellido2(persona.getString("APELLIDO2"));
-                per.setCalle(persona.getString("CALLE"));
-                per.setPiso(persona.getInt("PISO"));
-                per.setMano(persona.getString("MANO"));
-                per.setPortal(persona.getString("PORTAL"));
-                per.setTelMovil(persona.getString("TELEMPRESA"));
-                per.setTelPers(persona.getString("TELPERSONAL"));
-                per.setFecha_nac(new java.util.Date(persona.getDate("FECHANAC").getTime()));
-                
-                cargo = "administracion";
-            }
-            else{
-                persona = sentencia.executeQuery(select2);
-                if(persona.next()){
-                        
-                dni = persona.getString("DNI");
-                per = new Persona(persona.getString("DNI"),persona.getString("NOMBRE"),persona.getString("APELLIDO1"),persona.getString("APELLIDO2"),persona.getString("CALLE"),persona.getInt("PISO"),persona.getString("MANO"),persona.getString("PORTAL"),persona.getString("TELEMPRESA"),persona.getString("TELPERSONAL"),persona.getFloat("SALARIO"),persona.getDate("FECHANAC"));
-                
-                cargo = "logistica";
-                }
-            }
+        if(per == null){
+            per = LogisticaBD.comprobarDniLog(d);
+            cargo = "logistica";
+            if(per == null)
+                cargo = null;
         }
-        catch(Exception e){
-            javax.swing.JOptionPane.showMessageDialog(null ,"Problemas"+e.getMessage());
-        }
+        
+                
         return per;
     }
     
     public static void guardarPersona(String dni, String nombre, String apellido1, String apellido2, String calle, String portal, String piso, String mano, String telPers, String telMovil, String salario, Calendar fecha, String opc){
         
-        if(salario.isEmpty())
-            salario = null;
-        if(telPers.isEmpty())
-            telPers = null;
+        if(opc.compareToIgnoreCase("administracion") == 0)
+            AdministracionBD.guardarAdministracion(dni, nombre, apellido1, apellido2, calle, portal, piso, mano, telPers, telMovil, salario, fecha);
         else
-            telPers = "'" + telPers + "'";
-        
-        java.sql.Date fechasql = new java.sql.Date(fecha.getTime().getTime());
-        
-        String secuencia = "INSERT INTO " + opc + " (dni,NOMBRE,APELLIDO1,APELLIDO2,CALLE,PORTAL,PISO,MANO,TELEMPRESA,TELPERSONAL,FECHANAC,SALARIO,IDCENTRO) VALUES('" + dni + "','" + nombre + "','" + apellido1 + "','" + apellido2 + "','" + calle + "'," + portal + "," + piso + ",'" + mano + "','" + telMovil + "'," + telPers + ",TO_DATE('" + fechasql + "','YYYY-MM-DD')," + salario + "," + ejerciciofase2.EjercicioFase2.guardarCentro() + ")";
-        
-        try{
-        Statement sentencia = GenericoBD.conexion().createStatement();
-        sentencia.executeUpdate(secuencia);
-        }
-        catch(Exception e){
-            javax.swing. JOptionPane . showMessageDialog (null ," Problemas"+e. getMessage ());
-        }
+            LogisticaBD.guardarLogistica(dni, nombre, apellido1, apellido2, calle, portal, piso, mano, telPers, telMovil, salario, fecha);
     }
     
     public static void borrarPersona(){
-        String secuencia = "delete from " + cargo + " where dni = '" + ejerciciofase2.EjercicioFase2.recogerDni() + "'";
         
-        try{
-        Statement sentencia = GenericoBD.conexion().createStatement();
-        sentencia.executeUpdate(secuencia);
-        per = null;
+        if(cargo.compareToIgnoreCase("administracion") == 0){
+            AdministracionBD.borrarAdministracion(dni);
+            per = null;
         }
-        catch(Exception e){
-            javax.swing. JOptionPane . showMessageDialog (null ," Problemas"+e. getMessage ());
+        else{
+            LogisticaBD.borrarLogistica(dni);
+            per = null;
         }
-    }
-    
-    public static String cargo(){
-        return cargo;
     }
     
     public static void editarPersona(String dni, String nombre, String apellido1, String apellido2, String calle, String portal, String piso, String mano, String telPers, String telMovil, String salario, Calendar fecha, String opc){
-        if(salario.isEmpty())
-            salario = null;
-        if(telPers.isEmpty())
-            telPers = null;
         
-        
-        java.sql.Date fechasql = new java.sql.Date(fecha.getTime().getTime());
-        
-        String actualizar = "UPDATE " + opc + " SET NOMBRE = '" + nombre + "', APELLIDO1 = '" + apellido1 + "', APELLIDO2 = '" + apellido2 + "', CALLE = '" + calle + "', PORTAL = " + portal + ", PISO = " + piso + ", MANO = '" + mano + "', TELEMPRESA = '" + telMovil + "', TELPERSONAL = " + telPers + ", SALARIO = " + salario + ", FECHANAC = TO_DATE('" + fechasql + "','YYYY-MM-DD')";
-        String borrar = "DELETE FROM " + cargo + " WHERE DNI = '" + dni + "'";
-        String crear = "INSERT INTO " + opc + " (dni,NOMBRE,APELLIDO1,APELLIDO2,CALLE,PORTAL,PISO,MANO,TELEMPRESA,TELPERSONAL,FECHANAC,SALARIO,IDCENTRO) VALUES('" + dni + "','" + nombre + "','" + apellido1 + "','" + apellido2 + "','" + calle + "'," + portal + "," + piso + ",'" + mano + "','" + telMovil + "'," + telPers + ",TO_DATE('" + fechasql + "','YYYY-MM-DD')," + salario + "," + ejerciciofase2.EjercicioFase2.guardarCentro() + ")";
-                
-        try{
-        Statement sentencia = GenericoBD.conexion().createStatement();
-        if(cargo.compareToIgnoreCase(opc) == 0)
-            sentencia.executeUpdate(actualizar);
-        else{
-            sentencia.executeUpdate(crear);
-            sentencia.executeUpdate(borrar);
-        }
-            
-        }
-        catch(Exception e){
-            javax.swing. JOptionPane . showMessageDialog (null ," Problemas"+e. getMessage ());
-        }
+        if(opc.compareToIgnoreCase("administracion") == 0)
+            AdministracionBD.editarAdministracion(dni, nombre, apellido1, apellido2, calle, portal, piso, mano, telPers, telMovil, salario, fecha, opc);
+        else
+            LogisticaBD.editarLogistica(dni, nombre, apellido1, apellido2, calle, portal, piso, mano, telPers, telMovil, salario, fecha, opc);
+    }
+
+    public static String cargo(){
+        return cargo;
     }
 }

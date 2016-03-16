@@ -18,6 +18,9 @@ public class Persona {
     private float salario;
     private Date fecha_nac;
 
+    public Persona() {
+    }
+
     public Persona(String dni, String nombre, String apellido1, String apellido2, String calle, int piso, String mano, String portal, String telMovil, String telPers, float salario, Date fecha_nac) {
         this.dni = dni;
         this.nombre = nombre;

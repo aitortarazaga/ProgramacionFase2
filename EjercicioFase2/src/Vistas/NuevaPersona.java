@@ -27,8 +27,8 @@ public class NuevaPersona extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Bnuevo = new javax.swing.JButton();
+        Botro = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -39,17 +39,17 @@ public class NuevaPersona extends javax.swing.JDialog {
         jTextArea1.setText("El DNI introducido no se encuentra en nuestra base de datos\n                     ¿Que desea hacer?");
         jScrollPane1.setViewportView(jTextArea1);
 
-        jButton1.setText("Nuevo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Bnuevo.setText("Nuevo");
+        Bnuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BnuevoActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Otro");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Botro.setText("Otro");
+        Botro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BotroActionPerformed(evt);
             }
         });
 
@@ -63,9 +63,9 @@ public class NuevaPersona extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(132, 132, 132)
-                .addComponent(jButton1)
+                .addComponent(Bnuevo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(Botro)
                 .addGap(157, 157, 157))
             .addGroup(layout.createSequentialGroup()
                 .addGap(72, 72, 72)
@@ -89,21 +89,22 @@ public class NuevaPersona extends javax.swing.JDialog {
                     .addComponent(jLabel2))
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(Bnuevo)
+                    .addComponent(Botro))
                 .addGap(47, 47, 47))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BnuevoActionPerformed
         ejerciciofase2.EjercicioFase2.nuevoTrabajador();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BnuevoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void BotroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotroActionPerformed
         ejerciciofase2.EjercicioFase2.limpiarDni();
-    }//GEN-LAST:event_jButton2ActionPerformed
+        ejerciciofase2.EjercicioFase2.crearNuevo();
+    }//GEN-LAST:event_BotroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -148,8 +149,8 @@ public class NuevaPersona extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton Bnuevo;
+    private javax.swing.JButton Botro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

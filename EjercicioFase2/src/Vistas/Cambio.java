@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import ejerciciofase2.EjercicioFase2;
 
 public class Cambio extends javax.swing.JFrame {
 
@@ -432,7 +433,6 @@ public class Cambio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TFdniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFdniActionPerformed
-        GenericoBD.abrirConexion();
         
         if(PersonaBD.comprobarDni(TFdni.getText()) == null){
             ejerciciofase2.EjercicioFase2.mostrarNuevo();
@@ -456,35 +456,6 @@ public class Cambio extends javax.swing.JFrame {
             TFmano.setText(PersonaBD.comprobarDni(TFdni.getText()).getMano());
             TFtelPers.setText(PersonaBD.comprobarDni(TFdni.getText()).getTelPers());
             TFmovil.setText(PersonaBD.comprobarDni(TFdni.getText()).getTelMovil());
-            System.out.println(PersonaBD.comprobarDni(TFdni.getText()).getFecha_nac());
-            
-            
-            /*
-            Calendar fecha = null;
-                java.util.Date fechasql = PersonaBD.comprobarDni(TFdni.getText()).getFecha_nac();
-                if(fechasql != null){
-                    fecha = new GregorianCalendar();
-                    fecha.setTime(fechasql);
-                }
-            DCfecha.setSelectedDate(fecha);
-            */
-            /*Date date = PersonaBD.comprobarDni(TFdni.getText()).getFecha_nac();
-            
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String fecha = sdf.format(date);
-            
-            Date date1;
-            try {
-                date1 = new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(date1);
-                DCfecha.setSelectedDate(cal);
-            } catch (ParseException ex) {
-                Logger.getLogger(Cambio.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
-            
-            //DCfecha.setDate(PersonaBD.comprobarDni(TFdni.getText()).getFecha_nac());
-            
             String s;
             if(PersonaBD.comprobarDni(TFdni.getText()).getSalario() == 0)
                 s = "";
@@ -504,9 +475,9 @@ public class Cambio extends javax.swing.JFrame {
                 TFnombre.setEnabled(true);
                 TFnombre.requestFocus();
             }
+            if(ejerciciofase2.EjercicioFase2.getVisualizar())
+                TFnombre.setEnabled(false);
         }
-            
-        GenericoBD.cerrarConexion();
     }//GEN-LAST:event_TFdniActionPerformed
 
     private void TFnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFnombreActionPerformed

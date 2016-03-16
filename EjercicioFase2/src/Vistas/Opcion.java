@@ -98,14 +98,13 @@ public class Opcion extends javax.swing.JDialog {
 
     private void BvisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BvisualizarActionPerformed
         ejerciciofase2.EjercicioFase2.cerrarOpcion();
+        ejerciciofase2.EjercicioFase2.visualizar();
     }//GEN-LAST:event_BvisualizarActionPerformed
 
     private void BborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BborrarActionPerformed
-        GenericoBD.abrirConexion();
         PersonaBD.borrarPersona();
         ejerciciofase2.EjercicioFase2.cerrarOpcion();
         ejerciciofase2.EjercicioFase2.reiniciarCambio();
-        GenericoBD.cerrarConexion();
     }//GEN-LAST:event_BborrarActionPerformed
 
     private void BeditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BeditarActionPerformed
