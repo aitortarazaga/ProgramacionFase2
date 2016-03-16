@@ -3,12 +3,10 @@ package Vistas;
 
 import Clases.*;
 import EjercicioFase2.*;
+import ejerciciofase2.EjercicioFase2;
 
 public class Centro extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Centro
-     */
     public Centro() {
         initComponents();
         TFnombre.setEditable(false);
@@ -40,6 +38,9 @@ public class Centro extends javax.swing.JFrame {
         TFnombre = new javax.swing.JTextField();
         Bentrar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        Bmodificar = new javax.swing.JButton();
+        Bborrar = new javax.swing.JButton();
+        Bnuevo = new javax.swing.JButton();
 
         jScrollPane1.setViewportView(jTextPane1);
 
@@ -107,6 +108,20 @@ public class Centro extends javax.swing.JFrame {
             }
         });
 
+        Bmodificar.setText("Modificar");
+        Bmodificar.setActionCommand("Modificar");
+        Bmodificar.setEnabled(false);
+
+        Bborrar.setText("Borrar");
+        Bborrar.setEnabled(false);
+
+        Bnuevo.setText("Nuevo");
+        Bnuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BnuevoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -124,7 +139,13 @@ public class Centro extends javax.swing.JFrame {
                         .addGap(0, 96, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(46, 46, 46)
+                .addComponent(Bnuevo)
+                .addGap(18, 18, 18)
+                .addComponent(Bmodificar)
+                .addGap(18, 18, 18)
+                .addComponent(Bborrar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Bentrar)
                 .addGap(22, 22, 22))
         );
@@ -138,10 +159,14 @@ public class Centro extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButton1)))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(Bentrar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Bentrar)
+                    .addComponent(Bmodificar)
+                    .addComponent(Bnuevo)
+                    .addComponent(Bborrar))
                 .addContainerGap())
         );
 
@@ -150,8 +175,8 @@ public class Centro extends javax.swing.JFrame {
 
     private void BentrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BentrarActionPerformed
         GenericoBD.cerrarConexion();
-        ejerciciofase2.EjercicioFase2.cerrarCentro();
-        ejerciciofase2.EjercicioFase2.mostrarCambio();
+        EjercicioFase2.cerrarCentro();
+        EjercicioFase2.mostrarCambio();
     }//GEN-LAST:event_BentrarActionPerformed
 
     private void CBidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBidActionPerformed
@@ -160,11 +185,18 @@ public class Centro extends javax.swing.JFrame {
         TFnombre.setText(CentroBD.llenarNombre(id));
         ejerciciofase2.EjercicioFase2.idCentro(idCentro);
         Bentrar.setEnabled(true);
+        Bmodificar.setEnabled(true);
+        Bborrar.setEnabled(true);
     }//GEN-LAST:event_CBidActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ejerciciofase2.EjercicioFase2.cerrarCentro();
+        EjercicioFase2.cerrarCentro();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void BnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BnuevoActionPerformed
+        EjercicioFase2.crearNc();
+        EjercicioFase2.cerrarCambio();
+    }//GEN-LAST:event_BnuevoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -202,7 +234,10 @@ public class Centro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Bborrar;
     private javax.swing.JButton Bentrar;
+    private javax.swing.JButton Bmodificar;
+    private javax.swing.JButton Bnuevo;
     private javax.swing.JComboBox CBid;
     private javax.swing.JTextField TFnombre;
     private javax.swing.JButton jButton1;

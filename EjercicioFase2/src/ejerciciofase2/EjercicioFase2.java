@@ -16,9 +16,14 @@ public class EjercicioFase2 {
     private static boolean opc;
     private static String Dni;
     private static boolean visualizar;
+    private static NuevoCentro nc;
     
     public static void main(String[] args) {
         
+        crearCentro();
+    }
+    
+    public static void crearCentro(){
         ce = new Centro();
         ce.setLocationRelativeTo(null);
         ce.setVisible(true);
@@ -119,5 +124,15 @@ public class EjercicioFase2 {
     
     public static boolean getVisualizar(){
         return visualizar;
+    }
+    
+    public static void crearNc(){
+        nc = new NuevoCentro();
+        nc.setLocationRelativeTo(null);
+        nc.setVisible(true);
+    }
+    
+    public static void cerrarNc(){
+        nc.dispose();
     }
 }
