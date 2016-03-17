@@ -6,6 +6,7 @@
 package Vistas;
 
 import ejerciciofase2.EjercicioFase2;
+import javax.swing.JOptionPane;
 
 public class NuevoCentro extends javax.swing.JFrame {
 
@@ -173,8 +174,15 @@ public class NuevoCentro extends javax.swing.JFrame {
     }//GEN-LAST:event_tfCalleActionPerformed
 
     private void bCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelarActionPerformed
-        EjercicioFase2.cerrarNc();
-        EjercicioFase2.crearCentro();
+        char cancelar;
+        do{
+            cancelar= JOptionPane.showInputDialog(this,"¿Estas segur@ que quieres salir de esta ventana? <s/n>").toLowerCase().charAt(0);
+        }
+        while(cancelar!='s' && cancelar!='n');
+        
+        if(cancelar=='s')
+            EjercicioFase2.cerrarNc();
+        
     }//GEN-LAST:event_bCancelarActionPerformed
 
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
