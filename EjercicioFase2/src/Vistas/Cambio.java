@@ -518,13 +518,6 @@ public class Cambio extends javax.swing.JFrame {
         DCfecha.setEnabled(true);
     }//GEN-LAST:event_TFsalarioActionPerformed
 
-    private void DCfechaOnSelectionChange(datechooser.events.SelectionChangedEvent evt) {//GEN-FIRST:event_DCfechaOnSelectionChange
-        
-        DCfecha.setEnabled(false);
-        RBadministracion.setEnabled(true);
-        RBlogistica.setEnabled(true);
-    }//GEN-LAST:event_DCfechaOnSelectionChange
-
     private void TFcalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFcalleActionPerformed
         if(TFcalle.getText().isEmpty())
             javax.swing.JOptionPane.showMessageDialog(null, "El campo no puede estar vacio");
@@ -620,6 +613,12 @@ public class Cambio extends javax.swing.JFrame {
     private void BsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BsalirActionPerformed
         ejerciciofase2.EjercicioFase2.cerrarCambio();
     }//GEN-LAST:event_BsalirActionPerformed
+
+    private void DCfechaOnSelectionChange(datechooser.events.SelectionChangedEvent evt) {//GEN-FIRST:event_DCfechaOnSelectionChange
+        DCfecha.setEnabled(false);
+        RBadministracion.setEnabled(true);
+        RBlogistica.setEnabled(true);
+    }//GEN-LAST:event_DCfechaOnSelectionChange
     
     /**
      * @param args the command line arguments
