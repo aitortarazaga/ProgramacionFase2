@@ -329,7 +329,6 @@ public class Cambio extends javax.swing.JFrame {
         } catch (datechooser.model.exeptions.IncompatibleDataExeption e1) {
             e1.printStackTrace();
         }
-        DCfecha.setEnabled(false);
         DCfecha.addSelectionChangedListener(new datechooser.events.SelectionChangedListener() {
             public void onSelectionChange(datechooser.events.SelectionChangedEvent evt) {
                 DCfechaOnSelectionChange(evt);
@@ -434,7 +433,7 @@ public class Cambio extends javax.swing.JFrame {
 
     private void TFdniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFdniActionPerformed
         
-        if(PersonaBD.comprobarDni(TFdni.getText()) == null){
+        if(EjercicioFase2.compDni(TFdni.getText()) == null){
             ejerciciofase2.EjercicioFase2.mostrarNuevo();
             if(ejerciciofase2.EjercicioFase2.crearNuevo() == true){
                 TFdni.setEnabled(false);
@@ -445,29 +444,28 @@ public class Cambio extends javax.swing.JFrame {
         }
         else{
             TFdni.setEnabled(false);
-            TFdni.setText(PersonaBD.comprobarDni(TFdni.getText()).getDni());
-            TFnombre.setText(PersonaBD.comprobarDni(TFdni.getText()).getNombre());
-            TFapellidoUno.setText(PersonaBD.comprobarDni(TFdni.getText()).getApellido1());
-            TFapellidoDos.setText(PersonaBD.comprobarDni(TFdni.getText()).getApellido2());
-            TFcalle.setText(PersonaBD.comprobarDni(TFdni.getText()).getCalle());
-            TFportal.setText(PersonaBD.comprobarDni(TFdni.getText()).getPortal());
-            String p = Integer.toString(PersonaBD.comprobarDni(TFdni.getText()).getPiso());
+            TFdni.setText(EjercicioFase2.getPersona().getDni());
+            TFnombre.setText(EjercicioFase2.getPersona().getNombre());
+            TFapellidoUno.setText(EjercicioFase2.getPersona().getApellido1());
+            TFapellidoDos.setText(EjercicioFase2.getPersona().getApellido2());
+            TFcalle.setText(EjercicioFase2.getPersona().getCalle());
+            TFportal.setText(EjercicioFase2.getPersona().getPortal());
+            String p = Integer.toString(EjercicioFase2.getPersona().getPiso());
             TFpiso.setText(p);
-            TFmano.setText(PersonaBD.comprobarDni(TFdni.getText()).getMano());
-            TFtelPers.setText(PersonaBD.comprobarDni(TFdni.getText()).getTelPers());
-            TFmovil.setText(PersonaBD.comprobarDni(TFdni.getText()).getTelMovil());
-            System.out.println(EjercicioFase2.getFechaNac());
+            TFmano.setText(EjercicioFase2.getPersona().getMano());
+            TFtelPers.setText(EjercicioFase2.getPersona().getTelPers());
+            TFmovil.setText(EjercicioFase2.getPersona().getTelMovil());
             DCfecha.setSelectedDate(EjercicioFase2.getFechaNac());
             String s;
-            if(PersonaBD.comprobarDni(TFdni.getText()).getSalario() == 0)
+            if(EjercicioFase2.getPersona().getSalario() == 0)
                 s = null;
             else
-                s = Float.toString(PersonaBD.comprobarDni(TFdni.getText()).getSalario());
+                s = Float.toString(EjercicioFase2.getPersona().getSalario());
             TFsalario.setText(s);
-            if(PersonaBD.cargo().compareToIgnoreCase("administracion") == 0)
+            if(EjercicioFase2.getCargo().compareToIgnoreCase("administracion") == 0)
                 RBadministracion.setSelected(true);
             else
-                if(PersonaBD.cargo().compareToIgnoreCase("logistica") == 0)
+                if(EjercicioFase2.getCargo().compareToIgnoreCase("logistica") == 0)
                     RBlogistica.setSelected(true);
             RBadministracion.setEnabled(false);
             RBlogistica.setEnabled(false);
@@ -591,14 +589,12 @@ public class Cambio extends javax.swing.JFrame {
             if(RBlogistica.isSelected())
                 opc = "logistica";
 
-        GenericoBD.abrirConexion();
         if(ejerciciofase2.EjercicioFase2.o() == false)
             PersonaBD.guardarPersona(TFdni.getText(), TFnombre.getText(), TFapellidoUno.getText(), TFapellidoDos.getText(), TFcalle.getText(), TFportal.getText(), TFpiso.getText(), TFmano.getText(), TFtelPers.getText(), TFmovil.getText(), TFsalario.getText(), DCfecha.getSelectedDate(), opc);
         else
             if(ejerciciofase2.EjercicioFase2.o() == true)
                 PersonaBD.editarPersona(TFdni.getText(), TFnombre.getText(), TFapellidoUno.getText(), TFapellidoDos.getText(), TFcalle.getText(), TFportal.getText(), TFpiso.getText(), TFmano.getText(), TFtelPers.getText(), TFmovil.getText(), TFsalario.getText(), DCfecha.getSelectedDate(), opc);
-        ejerciciofase2.EjercicioFase2.reiniciarCambio();
-        GenericoBD.cerrarConexion();
+        ejerciciofase2.EjercicioFase2.reiniciarCambio();   
     }//GEN-LAST:event_BguardarActionPerformed
 
     private void RBlogisticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RBlogisticaActionPerformed

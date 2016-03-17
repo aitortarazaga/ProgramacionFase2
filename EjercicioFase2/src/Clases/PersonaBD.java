@@ -26,7 +26,8 @@ public class PersonaBD {
             if(per == null)
                 cargo = null;
         }
-        
+        ejerciciofase2.EjercicioFase2.setPersona(per);
+        ejerciciofase2.EjercicioFase2.setCargo(cargo);
                 
         return per;
     }

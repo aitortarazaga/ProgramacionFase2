@@ -17,6 +17,8 @@ public class EjercicioFase2 {
     private static String Dni;
     private static boolean visualizar;
     private static NuevoCentro nc;
+    private static Persona per;
+    private static String cargo;
     
     public static void main(String[] args) {
         
@@ -134,5 +136,25 @@ public class EjercicioFase2 {
     
     public static void cerrarNc(){
         nc.dispose();
+    }
+    
+    public static void setPersona(Persona p){
+        per = p;
+    }
+    
+    public static Persona getPersona(){
+        return per;
+    }
+    
+    public static void setCargo(String c){
+        cargo = c;
+    }
+    
+    public static String getCargo(){
+        return cargo;
+    }
+    
+    public static Persona compDni(String dni){
+        return PersonaBD.comprobarDni(dni);
     }
 }
