@@ -8,14 +8,14 @@ public class Centros {
     private String id;
     private String nombre;
     private String calle;
-    private int numero;
-    private int cp;
+    private String numero;
+    private String cp;
     private String ciudad;
     private String provincia;
     private String telefono;
     private ArrayList<Persona> per;
 
-    public Centros(String id, String nombre, String calle, int numero, int cp, String ciudad, String provincia, String telefono, ArrayList<Persona> per) {
+    public Centros(String id, String nombre, String calle, String numero, String cp, String ciudad, String provincia, String telefono, ArrayList<Persona> per) {
         this.id = id;
         this.nombre = nombre;
         this.calle = calle;
@@ -25,6 +25,9 @@ public class Centros {
         this.provincia = provincia;
         this.telefono = telefono;
         this.per = per;
+    }
+
+    public Centros() {
     }
 
     public String getId() {
@@ -51,19 +54,19 @@ public class Centros {
         this.calle = calle;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
-    public int getCp() {
+    public String getCp() {
         return cp;
     }
 
-    public void setCp(int cp) {
+    public void setCp(String cp) {
         this.cp = cp;
     }
 

@@ -3,7 +3,7 @@ package Vistas;
 
 import java.util.Calendar;
 import java.util.Locale;
-import EjercicioFase2.*;
+import ejerciciofase2.EjercicioFase2;
 import Clases.*;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -13,14 +13,26 @@ import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import ejerciciofase2.EjercicioFase2;
+import Excepciones.*;
 
 public class Cambio extends javax.swing.JFrame {
-
+    
     private static String opc = "";
     
     public Cambio() {
         initComponents();
         
+        EjercicioFase2.resetearPer();
+        
+        EjercicioFase2.guardarBoolean(false);
+        
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.YEAR,-18);
+        DCfecha.setMaxDate(c);
+        
+        Calendar d = Calendar.getInstance();
+        d.add(Calendar.YEAR,-67);
+        DCfecha.setMinDate(d);
         
     }
 
@@ -329,9 +341,10 @@ public class Cambio extends javax.swing.JFrame {
         } catch (datechooser.model.exeptions.IncompatibleDataExeption e1) {
             e1.printStackTrace();
         }
-        DCfecha.addSelectionChangedListener(new datechooser.events.SelectionChangedListener() {
-            public void onSelectionChange(datechooser.events.SelectionChangedEvent evt) {
-                DCfechaOnSelectionChange(evt);
+        DCfecha.setEnabled(false);
+        DCfecha.addCommitListener(new datechooser.events.CommitListener() {
+            public void onCommit(datechooser.events.CommitEvent evt) {
+                DCfechaOnCommit(evt);
             }
         });
 
@@ -417,11 +430,11 @@ public class Cambio extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(TFsalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12)
                     .addComponent(DCfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(67, 67, 67)
+                .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Bsalir)
                     .addComponent(Bguardar))
@@ -434,8 +447,8 @@ public class Cambio extends javax.swing.JFrame {
     private void TFdniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFdniActionPerformed
         
         if(EjercicioFase2.compDni(TFdni.getText()) == null){
-            ejerciciofase2.EjercicioFase2.mostrarNuevo();
-            if(ejerciciofase2.EjercicioFase2.crearNuevo() == true){
+            EjercicioFase2.mostrarNuevo();
+            if(EjercicioFase2.crearNuevo() == true){
                 TFdni.setEnabled(false);
                 TFnombre.setEnabled(true);
             }
@@ -455,7 +468,9 @@ public class Cambio extends javax.swing.JFrame {
             TFmano.setText(EjercicioFase2.getPersona().getMano());
             TFtelPers.setText(EjercicioFase2.getPersona().getTelPers());
             TFmovil.setText(EjercicioFase2.getPersona().getTelMovil());
+            DCfecha.setEnabled(true);
             DCfecha.setSelectedDate(EjercicioFase2.getFechaNac());
+            DCfecha.setEnabled(false);
             String s;
             if(EjercicioFase2.getPersona().getSalario() == 0)
                 s = null;
@@ -469,90 +484,194 @@ public class Cambio extends javax.swing.JFrame {
                     RBlogistica.setSelected(true);
             RBadministracion.setEnabled(false);
             RBlogistica.setEnabled(false);
-            ejerciciofase2.EjercicioFase2.guardarDni(TFdni.getText());
-            ejerciciofase2.EjercicioFase2.mostrarOpcion();
-            if(ejerciciofase2.EjercicioFase2.o() == true){
+            EjercicioFase2.guardarDni(TFdni.getText());
+            EjercicioFase2.mostrarOpcion();
+            if(EjercicioFase2.o() == true){
                 TFnombre.setEnabled(true);
-                TFnombre.requestFocus();
+                TFapellidoUno.setEnabled(true);
+                TFapellidoDos.setEnabled(true);
+                TFcalle.setEnabled(true);
+                TFportal.setEnabled(true);
+                TFpiso.setEnabled(true);
+                TFmano.setEnabled(true);
+                TFtelPers.setEnabled(true);
+                TFmovil.setEnabled(true);
+                TFsalario.setEnabled(true);
+                DCfecha.setEnabled(true);
+                RBlogistica.setEnabled(true);
+                RBadministracion.setEnabled(true);
+                Bguardar.setEnabled(true);
             }
-            if(ejerciciofase2.EjercicioFase2.getVisualizar())
+            else
+                if(EjercicioFase2.getVisualizar()){
                 TFnombre.setEnabled(false);
+                TFapellidoUno.setEnabled(false);
+                TFapellidoDos.setEnabled(false);
+                TFcalle.setEnabled(false);
+                TFportal.setEnabled(false);
+                TFpiso.setEnabled(false);
+                TFmano.setEnabled(false);
+                TFtelPers.setEnabled(false);
+                TFmovil.setEnabled(false);
+                TFsalario.setEnabled(false);
+                DCfecha.setEnabled(false);
+                RBlogistica.setEnabled(false);
+                RBadministracion.setEnabled(false);
+                Bguardar.setEnabled(false);
+            }
+            
         }
     }//GEN-LAST:event_TFdniActionPerformed
 
     private void TFnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFnombreActionPerformed
-        if(TFnombre.getText().isEmpty())
-            javax.swing.JOptionPane.showMessageDialog(null, "El campo no puede estar vacio");
-        else{
-            TFnombre.setEnabled(false);
-            TFapellidoUno.requestFocus();
-            TFapellidoUno.setEnabled(true);
-        }
+        try{
+            if(TFnombre.getText().isEmpty())
+                throw new CampoVacio();
+            else{
+                TFnombre.setEnabled(false);
+                TFapellidoUno.requestFocus();
+                TFapellidoUno.setEnabled(true);
+            }
+        }   
+        catch(CampoVacio e){
+                javax.swing.JOptionPane.showMessageDialog(null, "El campo no puede estar vacio");
+                }
+        
+        
     }//GEN-LAST:event_TFnombreActionPerformed
 
     private void TFapellidoUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFapellidoUnoActionPerformed
-        if(TFapellidoUno.getText().isEmpty())
+        try{
+            if(TFapellidoUno.getText().isEmpty())
+                throw new CampoVacio();
+            else{
+                TFapellidoUno.setEnabled(false);
+                TFapellidoDos.requestFocus();
+                TFapellidoDos.setEnabled(true);
+            }
+        }
+        catch(CampoVacio e){
             javax.swing.JOptionPane.showMessageDialog(null, "El campo no puede estar vacio");
-        else{
-            TFapellidoUno.setEnabled(false);
-            TFapellidoDos.requestFocus();
-            TFapellidoDos.setEnabled(true);
         }
     }//GEN-LAST:event_TFapellidoUnoActionPerformed
 
     private void TFapellidoDosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFapellidoDosActionPerformed
-        if(TFapellidoDos.getText().isEmpty())
+        try{
+            if(TFapellidoDos.getText().isEmpty())
+                throw new CampoVacio();
+            else{
+                TFapellidoDos.setEnabled(false);
+                TFcalle.requestFocus();
+                TFcalle.setEnabled(true);
+            }
+        }
+        catch(CampoVacio e){
             javax.swing.JOptionPane.showMessageDialog(null, "El campo no puede estar vacio");
-        else{
-            TFapellidoDos.setEnabled(false);
-            TFcalle.requestFocus();
-            TFcalle.setEnabled(true);
         }
     }//GEN-LAST:event_TFapellidoDosActionPerformed
 
     private void TFsalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFsalarioActionPerformed
+        try{
+            float n = Float.parseFloat(TFsalario.getText());
+            TFsalario.setEnabled(false);
+            DCfecha.setEnabled(true);
+        }
+        catch(NumberFormatException e){
+            javax.swing.JOptionPane.showMessageDialog(this,"Todos los caracteres deben de ser numericos");
+            TFsalario.setText("");
+        }
         
-        TFsalario.setEnabled(false);
-        DCfecha.setEnabled(true);
     }//GEN-LAST:event_TFsalarioActionPerformed
 
     private void TFcalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFcalleActionPerformed
-        if(TFcalle.getText().isEmpty())
+        try{
+            if(TFcalle.getText().isEmpty())
+                throw new CampoVacio();
+            else{
+                TFcalle.setEnabled(false);
+                TFportal.requestFocus();
+                TFportal.setEnabled(true);
+            }
+        }
+        catch(CampoVacio e){
             javax.swing.JOptionPane.showMessageDialog(null, "El campo no puede estar vacio");
-        else{
-            TFcalle.setEnabled(false);
-            TFportal.requestFocus();
-            TFportal.setEnabled(true);
         }
     }//GEN-LAST:event_TFcalleActionPerformed
 
     private void TFportalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFportalActionPerformed
-        if(TFportal.getText().isEmpty())
-            javax.swing.JOptionPane.showMessageDialog(null, "El campo no puede estar vacio");
-        else{
-            TFportal.setEnabled(false);
-            TFpiso.requestFocus();
-            TFpiso.setEnabled(true);
+        try{
+            if(TFportal.getText().isEmpty())
+                throw new CampoVacio();
+            else
+                if(TFportal.getText().length() > 2)
+                    throw new PortalNoValido();
+            else{
+                 int n = Integer.parseInt(TFportal.getText());
+                 TFportal.setEnabled(false);
+                 TFpiso.requestFocus();
+                 TFpiso.setEnabled(true);
+                 }
+            
         }
+        catch(CampoVacio e)
+        {
+            javax.swing.JOptionPane.showMessageDialog(this,"El campo no puede quedar vacio");
+            TFportal.setText("");
+        }
+        catch(PortalNoValido e)
+        {
+            javax.swing.JOptionPane.showMessageDialog(this,"La longitud del campo no es la correcta");
+            TFportal.setText("");
+        }
+        catch(NumberFormatException e){
+            javax.swing.JOptionPane.showMessageDialog(this,"Todos los caracteres deben de ser numericos");
+            TFportal.setText("");
+        }
+        
+        
     }//GEN-LAST:event_TFportalActionPerformed
 
     private void TFpisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFpisoActionPerformed
-        if(TFpiso.getText().isEmpty())
-            javax.swing.JOptionPane.showMessageDialog(null, "El campo no puede estar vacio");
+        try{
+            if(TFpiso.getText().isEmpty())
+            throw new CampoVacio();
+        else
+            if(TFpiso.getText().length() > 2)
+                    throw new PisoNoValido();
         else{
+            int n = Integer.parseInt(TFpiso.getText());
             TFpiso.setEnabled(false);
             TFmano.requestFocus();
             TFmano.setEnabled(true);
         }
+        }
+        catch(CampoVacio e){
+            javax.swing.JOptionPane.showMessageDialog(this,"El campo no puede quedar vacio");
+            TFpiso.setText("");
+        }
+        catch(PisoNoValido e){
+            javax.swing.JOptionPane.showMessageDialog(this,"La longitud del campo no es la correcta");
+            TFpiso.setText("");
+        }
+        catch(NumberFormatException e){
+            javax.swing.JOptionPane.showMessageDialog(this,"Todos los caracteres deben de ser numericos");
+            TFpiso.setText("");
+        }
+        
     }//GEN-LAST:event_TFpisoActionPerformed
 
     private void TFmanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFmanoActionPerformed
-        if(TFmano.getText().isEmpty())
+        try{
+            if(TFmano.getText().isEmpty())
+                throw new CampoVacio();
+            else{
+                TFmano.setEnabled(false);
+                TFtelPers.requestFocus();
+                TFtelPers.setEnabled(true);
+            }
+        }
+        catch(CampoVacio e){
             javax.swing.JOptionPane.showMessageDialog(null, "El campo no puede estar vacio");
-        else{
-            TFmano.setEnabled(false);
-            TFtelPers.requestFocus();
-            TFtelPers.setEnabled(true);
         }
     }//GEN-LAST:event_TFmanoActionPerformed
 
@@ -576,10 +695,31 @@ public class Cambio extends javax.swing.JFrame {
     }//GEN-LAST:event_RBadministracionActionPerformed
 
     private void TFtelPersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TFtelPersActionPerformed
+        try{
+            int n = Integer.parseInt(TFtelPers.getText());
+            if(TFtelPers.getText().isEmpty()){
+                TFtelPers.setEnabled(false);
+                TFmovil.setEnabled(true);
+                TFmovil.requestFocus();
+            }
+            else
+                if(TFtelPers.getText().length() == 9){
+                    TFtelPers.setEnabled(false);
+                    TFmovil.setEnabled(true);
+                    TFmovil.requestFocus();
+                }
+            else
+                    throw new TelefonoNoValido();
+        }
+        catch(TelefonoNoValido e){
+            javax.swing.JOptionPane.showMessageDialog(null, "El campo no tiene la longitud correcta");
+            TFtelPers.setText("");
+        }
+        catch(NumberFormatException e){
+            javax.swing.JOptionPane.showMessageDialog(this,"Todos los caracteres deben de ser numericos");
+            TFtelPers.setText("");
+        }
         
-        TFtelPers.setEnabled(false);
-        TFmovil.setEnabled(true);
-        TFmovil.requestFocus();
     }//GEN-LAST:event_TFtelPersActionPerformed
 
     private void BguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BguardarActionPerformed
@@ -589,12 +729,12 @@ public class Cambio extends javax.swing.JFrame {
             if(RBlogistica.isSelected())
                 opc = "logistica";
 
-        if(ejerciciofase2.EjercicioFase2.o() == false)
-            PersonaBD.guardarPersona(TFdni.getText(), TFnombre.getText(), TFapellidoUno.getText(), TFapellidoDos.getText(), TFcalle.getText(), TFportal.getText(), TFpiso.getText(), TFmano.getText(), TFtelPers.getText(), TFmovil.getText(), TFsalario.getText(), DCfecha.getSelectedDate(), opc);
+        if(EjercicioFase2.o() == false)
+            EjercicioFase2.guardarPersona(TFdni.getText(), TFnombre.getText(), TFapellidoUno.getText(), TFapellidoDos.getText(), TFcalle.getText(), TFportal.getText(), TFpiso.getText(), TFmano.getText(), TFtelPers.getText(), TFmovil.getText(), TFsalario.getText(), DCfecha.getSelectedDate(), opc);
         else
-            if(ejerciciofase2.EjercicioFase2.o() == true)
-                PersonaBD.editarPersona(TFdni.getText(), TFnombre.getText(), TFapellidoUno.getText(), TFapellidoDos.getText(), TFcalle.getText(), TFportal.getText(), TFpiso.getText(), TFmano.getText(), TFtelPers.getText(), TFmovil.getText(), TFsalario.getText(), DCfecha.getSelectedDate(), opc);
-        ejerciciofase2.EjercicioFase2.reiniciarCambio();   
+            if(EjercicioFase2.o() == true)
+                EjercicioFase2.editarPersona(TFdni.getText(), TFnombre.getText(), TFapellidoUno.getText(), TFapellidoDos.getText(), TFcalle.getText(), TFportal.getText(), TFpiso.getText(), TFmano.getText(), TFtelPers.getText(), TFmovil.getText(), TFsalario.getText(), DCfecha.getSelectedDate(), opc);
+        EjercicioFase2.reiniciarCambio();   
     }//GEN-LAST:event_BguardarActionPerformed
 
     private void RBlogisticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RBlogisticaActionPerformed
@@ -607,14 +747,14 @@ public class Cambio extends javax.swing.JFrame {
     }//GEN-LAST:event_RBlogisticaActionPerformed
 
     private void BsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BsalirActionPerformed
-        ejerciciofase2.EjercicioFase2.cerrarCambio();
+        EjercicioFase2.cerrarCambio();
     }//GEN-LAST:event_BsalirActionPerformed
 
-    private void DCfechaOnSelectionChange(datechooser.events.SelectionChangedEvent evt) {//GEN-FIRST:event_DCfechaOnSelectionChange
+    private void DCfechaOnCommit(datechooser.events.CommitEvent evt) {//GEN-FIRST:event_DCfechaOnCommit
         DCfecha.setEnabled(false);
         RBadministracion.setEnabled(true);
         RBlogistica.setEnabled(true);
-    }//GEN-LAST:event_DCfechaOnSelectionChange
+    }//GEN-LAST:event_DCfechaOnCommit
     
     /**
      * @param args the command line arguments

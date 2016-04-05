@@ -5,16 +5,60 @@
  */
 package Vistas;
 
+import Clases.Centros;
 import ejerciciofase2.EjercicioFase2;
 import javax.swing.JOptionPane;
+import Excepciones.*;
 
 public class NuevoCentro extends javax.swing.JFrame {
 
-    /**
-     * Creates new form NuevoCentro
-     */
+    public static Centros ce;
+    
     public NuevoCentro() {
         initComponents();
+        
+        ce = null;
+        
+        if(EjercicioFase2.getNm() == true){
+            tfNombre.setEnabled(true);
+            tfCalle.setEnabled(true);
+            tfNumero.setEnabled(true);
+            tfCp.setEnabled(true);
+            tfCiudad.setEnabled(true);
+            tfProvincia.setEnabled(true);
+            tfTelefono.setEnabled(true);
+            bGuardar.setEnabled(true);
+            
+            ce = EjercicioFase2.mostrarCentro();
+            
+            tfNombre.setText(ce.getNombre());
+            tfCalle.setText(ce.getCalle());
+            tfNumero.setText(ce.getNumero());
+            tfCp.setText(ce.getCp());
+            tfCiudad.setText(ce.getCiudad());
+            tfProvincia.setText(ce.getProvincia());
+            tfTelefono.setText(ce.getTelefono());
+        }
+        else
+        {
+            tfNombre.setEnabled(true);
+            tfCalle.setEnabled(false);
+            tfNumero.setEnabled(false);
+            tfCp.setEnabled(false);
+            tfCiudad.setEnabled(false);
+            tfProvincia.setEnabled(false);
+            tfTelefono.setEnabled(false);
+            bGuardar.setEnabled(false);
+            
+            tfNombre.setText("");
+            tfCalle.setText("");
+            tfNumero.setText("");
+            tfCp.setText("");
+            tfCiudad.setText("");
+            tfProvincia.setText("");
+            tfTelefono.setText("");
+        }
+            
     }
 
     /**
@@ -37,12 +81,12 @@ public class NuevoCentro extends javax.swing.JFrame {
         tfNombre = new javax.swing.JTextField();
         tfCalle = new javax.swing.JTextField();
         tfNumero = new javax.swing.JTextField();
-        tfCp = new javax.swing.JTextField();
         tfCiudad = new javax.swing.JTextField();
         tfProvincia = new javax.swing.JTextField();
-        tfTelefono = new javax.swing.JTextField();
         bGuardar = new javax.swing.JButton();
         bCancelar = new javax.swing.JButton();
+        tfCp = new javax.swing.JFormattedTextField();
+        tfTelefono = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,13 +107,42 @@ public class NuevoCentro extends javax.swing.JFrame {
 
         jLabel8.setText("TELEFONO:");
 
+        tfNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfNombreActionPerformed(evt);
+            }
+        });
+
+        tfCalle.setEnabled(false);
         tfCalle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfCalleActionPerformed(evt);
             }
         });
 
+        tfNumero.setEnabled(false);
+        tfNumero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfNumeroActionPerformed(evt);
+            }
+        });
+
+        tfCiudad.setEnabled(false);
+        tfCiudad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfCiudadActionPerformed(evt);
+            }
+        });
+
+        tfProvincia.setEnabled(false);
+        tfProvincia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfProvinciaActionPerformed(evt);
+            }
+        });
+
         bGuardar.setText("Guardar");
+        bGuardar.setEnabled(false);
         bGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bGuardarActionPerformed(evt);
@@ -80,6 +153,30 @@ public class NuevoCentro extends javax.swing.JFrame {
         bCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bCancelarActionPerformed(evt);
+            }
+        });
+
+        try {
+            tfCp.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfCp.setEnabled(false);
+        tfCp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfCpActionPerformed(evt);
+            }
+        });
+
+        try {
+            tfTelefono.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfTelefono.setEnabled(false);
+        tfTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfTelefonoActionPerformed(evt);
             }
         });
 
@@ -97,8 +194,8 @@ public class NuevoCentro extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
-                                .addGap(34, 34, 34)
-                                .addComponent(tfCp, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tfCp, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -116,9 +213,9 @@ public class NuevoCentro extends javax.swing.JFrame {
                                     .addComponent(jLabel8))
                                 .addGap(30, 30, 30)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfCiudad)
+                                    .addComponent(tfCiudad, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                     .addComponent(tfProvincia)
-                                    .addComponent(tfTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))))
+                                    .addComponent(tfTelefono)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(100, 100, 100)
                         .addComponent(bGuardar)
@@ -170,7 +267,18 @@ public class NuevoCentro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfCalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCalleActionPerformed
-        // TODO add your handling code here:
+        try{
+            if(tfCalle.getText().isEmpty())
+                throw new CampoVacio();
+            else{
+                tfCalle.setEnabled(false);
+                tfNumero.requestFocus();
+                tfNumero.setEnabled(true);
+            }
+        }
+        catch(CampoVacio e){
+            javax.swing.JOptionPane.showMessageDialog(null, "El campo no puede estar vacio");
+        }
     }//GEN-LAST:event_tfCalleActionPerformed
 
     private void bCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelarActionPerformed
@@ -180,14 +288,110 @@ public class NuevoCentro extends javax.swing.JFrame {
         }
         while(cancelar!='s' && cancelar!='n');
         
-        if(cancelar=='s')
+        if(cancelar=='s'){
             EjercicioFase2.cerrarNc();
+            EjercicioFase2.cerrarCentro();
+            EjercicioFase2.crearCentro();
+        }
         
     }//GEN-LAST:event_bCancelarActionPerformed
 
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
+        if(EjercicioFase2.getNm() == true){
+            EjercicioFase2.editarCentro(tfNombre.getText(), tfCalle.getText(), tfNumero.getText(), tfCp.getText(), tfCiudad.getText(), tfProvincia.getText(), tfTelefono.getText());
+            EjercicioFase2.cerrarNc();
+        }
+        else{
+        EjercicioFase2.insertCentro(tfNombre.getText(), tfCalle.getText(), tfNumero.getText(), tfCp.getText(), tfCiudad.getText(), tfProvincia.getText(), tfTelefono.getText());
+        }
+        EjercicioFase2.cerrarNc();
+        EjercicioFase2.cerrarCentro();
         EjercicioFase2.crearCentro();
     }//GEN-LAST:event_bGuardarActionPerformed
+
+    private void tfNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNombreActionPerformed
+        try{
+            if(tfNombre.getText().isEmpty())
+                throw new CampoVacio();
+            else{
+                tfNombre.setEnabled(false);
+                tfCalle.requestFocus();
+                tfCalle.setEnabled(true);
+            }
+        }
+        catch(CampoVacio e){
+            javax.swing.JOptionPane.showMessageDialog(null, "El campo no puede estar vacio");
+        }
+    }//GEN-LAST:event_tfNombreActionPerformed
+
+    private void tfNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNumeroActionPerformed
+        try{
+            if(tfNumero.getText().isEmpty())
+                throw new CampoVacio();
+            else{
+                int n = Integer.parseInt(tfNumero.getText());
+                tfNumero.setEnabled(false);
+                tfCp.requestFocus();
+                tfCp.setEnabled(true);
+            }
+        }
+        catch(CampoVacio e){
+            javax.swing.JOptionPane.showMessageDialog(null, "El campo no puede estar vacio");
+        }
+        catch(NumberFormatException e){
+            javax.swing.JOptionPane.showMessageDialog(this,"Todos los caracteres deben de ser numericos");
+            tfNumero.setText("");
+        }
+    }//GEN-LAST:event_tfNumeroActionPerformed
+
+    private void tfCpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCpActionPerformed
+        if(tfCp.getText().isEmpty())
+            JOptionPane.showMessageDialog(null, "El campo no puede quedar vacio");
+        else{
+            tfCp.setEnabled(false);
+            tfCiudad.setEnabled(true);
+            tfCiudad.requestFocus();
+        }
+    }//GEN-LAST:event_tfCpActionPerformed
+
+    private void tfCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCiudadActionPerformed
+        try{
+            if(tfCiudad.getText().isEmpty())
+                throw new CampoVacio();
+            else{
+                tfCiudad.setEnabled(false);
+                tfProvincia.requestFocus();
+                tfProvincia.setEnabled(true);
+            }
+        }
+        catch(CampoVacio e){
+            javax.swing.JOptionPane.showMessageDialog(null, "El campo no puede estar vacio");
+        }
+    }//GEN-LAST:event_tfCiudadActionPerformed
+
+    private void tfProvinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfProvinciaActionPerformed
+        try{
+            if(tfProvincia.getText().isEmpty())
+                throw new CampoVacio();
+            else{
+                tfProvincia.setEnabled(false);
+                tfTelefono.requestFocus();
+                tfTelefono.setEnabled(true);
+            }
+        }
+        catch(CampoVacio e){
+            javax.swing.JOptionPane.showMessageDialog(null, "El campo no puede estar vacio");
+        }
+    }//GEN-LAST:event_tfProvinciaActionPerformed
+
+    private void tfTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTelefonoActionPerformed
+        if(tfTelefono.getText().isEmpty())
+            JOptionPane.showMessageDialog(null, "El campo no puede quedar vacio");
+        else{
+            tfTelefono.setEnabled(false);
+            bGuardar.setEnabled(true);
+        }
+    }//GEN-LAST:event_tfTelefonoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,10 +441,10 @@ public class NuevoCentro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField tfCalle;
     private javax.swing.JTextField tfCiudad;
-    private javax.swing.JTextField tfCp;
+    private javax.swing.JFormattedTextField tfCp;
     private javax.swing.JTextField tfNombre;
     private javax.swing.JTextField tfNumero;
     private javax.swing.JTextField tfProvincia;
-    private javax.swing.JTextField tfTelefono;
+    private javax.swing.JFormattedTextField tfTelefono;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,6 +7,7 @@ package Vistas;
 
 import Clases.GenericoBD;
 import Clases.PersonaBD;
+import ejerciciofase2.EjercicioFase2;
 
 /**
  *
@@ -35,6 +36,7 @@ public class Opcion extends javax.swing.JDialog {
         Beditar = new javax.swing.JButton();
         Bborrar = new javax.swing.JButton();
         Bvisualizar = new javax.swing.JButton();
+        Bmenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -62,6 +64,13 @@ public class Opcion extends javax.swing.JDialog {
             }
         });
 
+        Bmenu.setText("Menu");
+        Bmenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BmenuActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -69,15 +78,18 @@ public class Opcion extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(191, 191, 191)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(80, 80, 80)
                         .addComponent(Bvisualizar)
                         .addGap(67, 67, 67)
-                        .addComponent(Beditar)
-                        .addGap(80, 80, 80)
-                        .addComponent(Bborrar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(191, 191, 191)
-                        .addComponent(jLabel1)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Bmenu)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Beditar)
+                                .addGap(80, 80, 80)
+                                .addComponent(Bborrar)))))
                 .addContainerGap(92, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -90,15 +102,17 @@ public class Opcion extends javax.swing.JDialog {
                     .addComponent(Beditar)
                     .addComponent(Bborrar)
                     .addComponent(Bvisualizar))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(Bmenu)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void BvisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BvisualizarActionPerformed
+        ejerciciofase2.EjercicioFase2.visualizar(true);
         ejerciciofase2.EjercicioFase2.cerrarOpcion();
-        ejerciciofase2.EjercicioFase2.visualizar();
     }//GEN-LAST:event_BvisualizarActionPerformed
 
     private void BborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BborrarActionPerformed
@@ -108,11 +122,18 @@ public class Opcion extends javax.swing.JDialog {
     }//GEN-LAST:event_BborrarActionPerformed
 
     private void BeditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BeditarActionPerformed
+        ejerciciofase2.EjercicioFase2.visualizar(false);
         boolean o = true;
         ejerciciofase2.EjercicioFase2.guardarBoolean(o);
         ejerciciofase2.EjercicioFase2.cerrarOpcion();
         
     }//GEN-LAST:event_BeditarActionPerformed
+
+    private void BmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BmenuActionPerformed
+        // TODO add your handling code here:
+        EjercicioFase2.cerrarOpcion();
+        EjercicioFase2.crearMenu();
+    }//GEN-LAST:event_BmenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,6 +180,7 @@ public class Opcion extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Bborrar;
     private javax.swing.JButton Beditar;
+    private javax.swing.JButton Bmenu;
     private javax.swing.JButton Bvisualizar;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

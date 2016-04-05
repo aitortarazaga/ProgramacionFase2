@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
+import ejerciciofase2.EjercicioFase2;
 
 public class PersonaBD {
     
@@ -17,15 +18,18 @@ public class PersonaBD {
     public static Persona comprobarDni(String d){
         dni = d;
         
-        per = AdministracionBD.comprobarDniAdm(d);
-        cargo = "administracion";
-        
-        if(per == null){
-            per = LogisticaBD.comprobarDniLog(d);
-            cargo = "logistica";
-            if(per == null)
-                cargo = null;
+        if(AdministracionBD.comprobarDniAdm(dni) != null){
+            cargo = "administracion";
+            per = AdministracionBD.comprobarDniAdm(dni);
         }
+        else
+            if(LogisticaBD.comprobarDniLog(dni) != null){
+                cargo = "logistica";
+                per = LogisticaBD.comprobarDniLog(dni);
+            }
+        else
+                cargo = null;
+        
         ejerciciofase2.EjercicioFase2.setPersona(per);
         ejerciciofase2.EjercicioFase2.setCargo(cargo);
                 
@@ -66,5 +70,9 @@ public class PersonaBD {
     
     public static Persona getPersona(){
         return per;
+    }
+    
+    public static void resetearPer(){
+        per = null;
     }
 }

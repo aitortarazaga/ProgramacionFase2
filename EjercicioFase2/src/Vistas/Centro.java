@@ -2,19 +2,24 @@
 package Vistas;
 
 import Clases.*;
-import EjercicioFase2.*;
 import ejerciciofase2.EjercicioFase2;
+import ejerciciofase2.EjercicioFase2;
+import javax.swing.JOptionPane;
+import java.util.ArrayList;
 
 public class Centro extends javax.swing.JFrame {
 
     public Centro() {
         initComponents();
-        TFnombre.setEditable(false);
-        jTextPane2.setEditable(false);
-        GenericoBD.abrirConexion();
         
-        for(int x = 0; x < CentroBD.llenarCb().size(); x++){
-            CBid.insertItemAt(CentroBD.llenarCb().get(x), x);
+        TFnombre.setEditable(false);
+        
+        
+        
+        ArrayList<String> c = EjercicioFase2.llenarCb();
+        
+        for(int x = 0; x < c.size(); x++){
+            CBid.insertItemAt(c.get(x), x);
         }
     }
 
@@ -109,11 +114,20 @@ public class Centro extends javax.swing.JFrame {
         });
 
         Bmodificar.setText("Modificar");
-        Bmodificar.setActionCommand("Modificar");
         Bmodificar.setEnabled(false);
+        Bmodificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BmodificarActionPerformed(evt);
+            }
+        });
 
         Bborrar.setText("Borrar");
         Bborrar.setEnabled(false);
+        Bborrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BborrarActionPerformed(evt);
+            }
+        });
 
         Bnuevo.setText("Nuevo");
         Bnuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -174,16 +188,16 @@ public class Centro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BentrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BentrarActionPerformed
-        GenericoBD.cerrarConexion();
         EjercicioFase2.cerrarCentro();
         EjercicioFase2.mostrarCambio();
+        EjercicioFase2.setCentro(CBid.getSelectedItem());
     }//GEN-LAST:event_BentrarActionPerformed
 
     private void CBidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBidActionPerformed
         String id = CBid.getSelectedItem().toString();
         int idCentro = Integer.parseInt(id);
-        TFnombre.setText(CentroBD.llenarNombre(id));
-        ejerciciofase2.EjercicioFase2.idCentro(idCentro);
+        TFnombre.setText(EjercicioFase2.llenarNombre(id));
+        EjercicioFase2.idCentro(idCentro);
         Bentrar.setEnabled(true);
         Bmodificar.setEnabled(true);
         Bborrar.setEnabled(true);
@@ -194,9 +208,20 @@ public class Centro extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void BnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BnuevoActionPerformed
+        EjercicioFase2.setNm(false);
         EjercicioFase2.crearNc();
-        EjercicioFase2.cerrarCambio();
     }//GEN-LAST:event_BnuevoActionPerformed
+
+    private void BborrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BborrarActionPerformed
+        EjercicioFase2.borrarCentro();
+        EjercicioFase2.cerrarCentro();
+        EjercicioFase2.crearCentro();
+    }//GEN-LAST:event_BborrarActionPerformed
+
+    private void BmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BmodificarActionPerformed
+        EjercicioFase2.setNm(true);
+        EjercicioFase2.crearNc();
+    }//GEN-LAST:event_BmodificarActionPerformed
 
     /**
      * @param args the command line arguments
