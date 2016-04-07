@@ -3,8 +3,14 @@
 <partes>
     <parte fecha="">
         <albaran id="">
-            <tiempo_ida></tiempo_ida>
-            <tiempo_vuelta></tiempo_vuelta>
+            <tiempo_ida>
+                <hIda></hIda>
+                <mIda></mIda>
+            </tiempo_ida>
+            <tiempo_vuelta>
+                <hVuelta></hVuelta>
+                <mVuelta></mVuelta>
+            </tiempo_vuelta>
             <matricula></matricula>
         </albaran>
     </parte>
